@@ -1,0 +1,2040 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>強積金考試溫習 · 模擬試題覆蓋手冊</title>
+  <style>
+    :root {
+      --bg:      oklch(98% 0.004 240);
+      --surface: oklch(100% 0 0);
+      --fg:      oklch(16% 0.015 252);
+      --muted:   oklch(50% 0.012 252);
+      --border:  oklch(91% 0.006 252);
+      --accent:  oklch(48% 0.17 250);
+
+      --accent-soft: color-mix(in oklch, var(--accent) 12%, transparent);
+      --accent-faint: color-mix(in oklch, var(--accent) 5%, transparent);
+
+      --font-display: "Source Han Serif TC", "Noto Serif TC", "Songti TC", "STSong", "PingFang TC", Georgia, serif;
+      --font-body:    -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "Helvetica Neue", system-ui, sans-serif;
+      --font-mono:    ui-monospace, "JetBrains Mono", "SF Mono", "Menlo", "Consolas", monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; width: 100%; }
+    html { overflow: hidden; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      width: 100vw;
+      min-width: 100vw;
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior: none;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+    }
+    body::-webkit-scrollbar { display: none; }
+    p { text-wrap: pretty; }
+    h1, h2, h3 { text-wrap: balance; }
+
+    .slide {
+      flex: 0 0 100vw;
+      width: 100vw;
+      height: 100vh;
+      scroll-snap-align: start;
+      padding: clamp(40px, 5.5vw, 80px) clamp(48px, 7vw, 96px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide.light { background: var(--bg); color: var(--fg); }
+    .slide.dark  { background: var(--fg); color: var(--bg); }
+    .slide.dark .muted    { color: rgba(245,247,250,0.7); }
+    .slide.dark .border   { border-color: rgba(245,247,250,0.18); }
+    .slide.hero { padding-block: clamp(56px, 8vw, 112px); }
+    .slide.center { align-items: center; text-align: center; justify-content: center; }
+    .slide.center .body { margin-inline: auto; }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 22px;
+    }
+    .slide.dark .eyebrow { color: color-mix(in oklch, var(--accent) 70%, white); }
+
+    .h-hero {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6.5vw, 92px);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin: 0 0 18px;
+      max-width: 18ch;
+      font-weight: 600;
+    }
+    .h-xl {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4.2vw, 56px);
+      line-height: 1.15;
+      letter-spacing: -0.005em;
+      margin: 0 0 18px;
+      max-width: 22ch;
+      font-weight: 600;
+    }
+    .h-md {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 2.8vw, 38px);
+      line-height: 1.2;
+      margin: 0 0 14px;
+      font-weight: 600;
+    }
+    .lead {
+      font-size: clamp(18px, 1.45vw, 22px);
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 60ch;
+      margin: 0 0 18px;
+    }
+    .slide.dark .lead { color: rgba(245,247,250,0.78); }
+    .meta { font-family: var(--font-mono); font-size: 13px; color: var(--muted); letter-spacing: 0.04em; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(120px, 18vw, 240px);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      font-weight: 600;
+      margin: 0 0 14px;
+    }
+    .stat-num .unit { font-size: 0.32em; opacity: 0.9; margin-left: 6px; }
+    .stat-caption {
+      font-size: clamp(18px, 1.5vw, 24px);
+      color: var(--muted);
+      max-width: 32ch;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .pt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 32px;
+    }
+    .pt-grid.two { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .pt-grid.four { grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .pt {
+      border-top: 2px solid var(--accent);
+      padding-top: 14px;
+    }
+    .pt h3 { font-size: 18px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.005em; font-family: var(--font-body); }
+    .pt p  { color: var(--muted); margin: 0; font-size: 15px; line-height: 1.55; }
+    .slide.dark .pt p { color: rgba(245,247,250,0.72); }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      margin-top: 32px;
+    }
+    .pipeline.three { grid-template-columns: repeat(3, 1fr); }
+    .pipeline.two { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+    .step .nb { font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: 0.08em; }
+    .step h3 { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin: 6px 0 4px; line-height: 1.25; }
+    .step p  { color: var(--muted); margin: 0; font-size: 14px; line-height: 1.55; }
+    .slide.dark .step p { color: rgba(245,247,250,0.72); }
+
+    .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 28px; }
+    .ba-col .ba-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+    .ba-col h3 { font-family: var(--font-display); font-size: 28px; line-height: 1.18; margin: 0 0 12px; max-width: 18ch; font-weight: 600; }
+    .ba-col p  { color: var(--muted); font-size: 16px; line-height: 1.55; margin: 0 0 8px; }
+    .slide.dark .ba-col p { color: rgba(245,247,250,0.72); }
+
+    .body { max-width: 1180px; }
+    .slide:not(.center) .body { width: 100%; }
+
+    /* dense fact list — for concept slides */
+    .facts {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .facts.two { grid-template-columns: 1fr 1fr; gap: 16px 36px; }
+    .facts li {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 18px;
+      padding: 8px 0;
+      border-top: 1px solid var(--border);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    .slide.dark .facts li { border-top-color: rgba(245,247,250,0.14); }
+    .facts li .k {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      padding-top: 3px;
+    }
+    .facts li .v { color: var(--fg); }
+    .slide.dark .facts li .v { color: var(--bg); }
+    .facts li .v em { font-style: normal; color: var(--accent); font-weight: 600; }
+
+    /* coverage strip — shows which mock Qs this concept answers */
+    .coverage {
+      margin-top: 24px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .slide.dark .coverage { border-top-color: rgba(245,247,250,0.18); }
+    .coverage strong { color: var(--accent); font-weight: 600; margin-right: 8px; }
+
+    /* question coverage callout — restated Q + answer */
+    .qcard {
+      background: var(--accent-faint);
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 78ch;
+    }
+    .slide.dark .qcard {
+      background: rgba(255,255,255,0.04);
+      border-left-color: var(--accent);
+    }
+    .qcard .qhead {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin: 0 0 4px;
+    }
+    .qcard p { margin: 0; color: var(--fg); }
+    .slide.dark .qcard p { color: var(--bg); }
+    .qcard .ans { display: inline-block; font-family: var(--font-mono); font-weight: 600; color: var(--accent); margin-right: 6px; }
+
+    /* table for ref tables */
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      font-size: 15px;
+    }
+    .ref-table th, .ref-table td {
+      text-align: left;
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .ref-table th {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .ref-table td.num { font-family: var(--font-mono); color: var(--accent); white-space: nowrap; }
+    .slide.dark .ref-table th, .slide.dark .ref-table td { border-bottom-color: rgba(245,247,250,0.14); }
+
+    .chapter-num {
+      font-family: var(--font-display);
+      font-size: clamp(120px, 16vw, 200px);
+      color: var(--accent);
+      line-height: 0.9;
+      margin: 0;
+      letter-spacing: -0.04em;
+      opacity: 0.9;
+      font-weight: 600;
+    }
+    .slide.dark .chapter-num { color: color-mix(in oklch, var(--accent) 70%, white); }
+
+    /* weight bar — for chapter weight overview */
+    .weights {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 28px;
+      max-width: 720px;
+    }
+    .w-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 70px;
+      gap: 18px;
+      align-items: center;
+      font-size: 15px;
+    }
+    .w-row .num { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+    .w-row .label { color: var(--bg); }
+    .slide.light .w-row .label { color: var(--fg); }
+    .w-bar {
+      position: relative;
+      height: 12px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .slide.light .w-bar { background: color-mix(in oklch, var(--accent) 8%, transparent); }
+    .w-bar .fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .w-row .pct { font-family: var(--font-mono); font-size: 12px; color: var(--accent); text-align: right; letter-spacing: 0.04em; }
+
+    /* deck chrome */
+    .deck-counter {
+      position: fixed;
+      bottom: 22px; right: 28px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--fg);
+      background: var(--surface);
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      letter-spacing: 0.04em;
+      z-index: 10;
+    }
+    .deck-hint {
+      position: fixed;
+      bottom: 22px; left: 28px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      z-index: 10;
+    }
+    .deck-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: var(--accent);
+      width: 0;
+      z-index: 10;
+      transition: width 0.18s ease;
+    }
+    .deck-nav {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 11;
+    }
+    .deck-nav button {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--fg);
+      width: 40px;
+      height: 32px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .deck-nav button:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .deck-nav button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .deck-jump {
+      position: fixed;
+      top: 18px;
+      right: 22px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 12;
+      padding: 6px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: color-mix(in oklch, var(--surface) 86%, transparent);
+      box-shadow: 0 8px 24px rgba(15,23,42,0.08);
+      backdrop-filter: blur(18px);
+    }
+    .deck-jump select,
+    .deck-jump input,
+    .deck-jump button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--fg);
+      font: 12px/1 var(--font-mono);
+      height: 30px;
+    }
+    .deck-jump select {
+      max-width: 104px;
+      padding: 0 22px 0 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      background-image:
+        linear-gradient(45deg, transparent 50%, currentColor 50%),
+        linear-gradient(135deg, currentColor 50%, transparent 50%);
+      background-position: calc(100% - 12px) 12px, calc(100% - 8px) 12px;
+      background-size: 4px 4px, 4px 4px;
+      background-repeat: no-repeat;
+    }
+    .deck-jump input {
+      width: 58px;
+      padding: 0 8px;
+      border-left: 1px solid var(--border);
+      text-align: center;
+    }
+    .deck-jump input::-webkit-outer-spin-button,
+    .deck-jump input::-webkit-inner-spin-button { appearance: none; margin: 0; }
+    .deck-jump button {
+      width: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .deck-jump select:focus-visible,
+    .deck-jump input:focus-visible,
+    .deck-jump button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .deck-tag {
+      position: absolute;
+      top: clamp(28px, 4vw, 44px);
+      left: clamp(48px, 7vw, 96px);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .slide.dark .deck-tag { color: rgba(245,247,250,0.55); }
+
+    .note {
+      position: absolute;
+      bottom: clamp(28px, 4vw, 44px);
+      left: clamp(48px, 7vw, 96px);
+      max-width: 56ch;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+    }
+    .slide.dark .note { color: rgba(245,247,250,0.55); }
+
+    /* small badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 01 cover -->
+<section class="slide hero light center" data-screen-label="01 封面">
+  <div class="eyebrow">MPF EXAM · 強積金中介人考試 · 練習題庫覆蓋</div>
+  <h1 class="h-hero">考一次就過。<br/>從題到本，逐章拆解。</h1>
+  <p class="lead">以富衛商學院《練習題庫》為基準，回到《研習資料手冊》第九版原文。<br/>按考試 80 題格式與題庫高頻考點，逐章拆解。</p>
+  <p class="meta">範圍 · 第1–7章 · 考試80條選擇題 · 合格70% (56/80)</p>
+</section>
+
+<!-- 02 exam format -->
+<section class="slide light" data-screen-label="02 考試格式">
+  <div class="deck-tag">考試須知</div>
+  <p class="eyebrow">Exam format</p>
+  <h2 class="h-xl">兩小時、八十題、四選一。</h2>
+  <ul class="facts two">
+    <li><span class="k">TIME</span><span class="v">考試時間 <em>2 小時</em>，每題約 1.5 分鐘</span></li>
+    <li><span class="k">QTY</span><span class="v">總共 <em>80 題</em> 四選一選擇題</span></li>
+    <li><span class="k">PASS</span><span class="v">合格分數 <em>70%</em> ＝答對 <em>56 題</em></span></li>
+    <li><span class="k">LANG</span><span class="v">試卷設有中英對照</span></li>
+    <li><span class="k">BRING</span><span class="v">鉛筆、擦膠、身份證明文件 (HKID 或護照)</span></li>
+    <li><span class="k">LATE</span><span class="v">遲到 15 分鐘以上不得入場</span></li>
+  </ul>
+  <p class="meta" style="margin-top:24px">來源：練習題庫 P.3 一般考試須知。</p>
+</section>
+
+<!-- 03 chapter weight -->
+<section class="slide dark" data-screen-label="03 章節比重">
+  <div class="deck-tag">考試比重</div>
+  <p class="eyebrow">Chapter weight</p>
+  <h2 class="h-xl" style="color: var(--bg)">第3章 + 第7章 ＝ 65%。<br/>溫習主力放這兩章。</h2>
+  <div class="weights">
+    <div class="w-row"><span class="num">CH 1</span><span class="label">制度簡介</span><div class="w-bar"><div class="fill" style="width:1%"></div></div><span class="pct">1%</span></div>
+    <div class="w-row"><span class="num">CH 2</span><span class="label">規管架構</span><div class="w-bar"><div class="fill" style="width:6%"></div></div><span class="pct">6%</span></div>
+    <div class="w-row"><span class="num">CH 3</span><span class="label">制度主要特點</span><div class="w-bar"><div class="fill" style="width:45%"></div></div><span class="pct">45%</span></div>
+    <div class="w-row"><span class="num">CH 4</span><span class="label">強積金受託人</span><div class="w-bar"><div class="fill" style="width:5%"></div></div><span class="pct">5%</span></div>
+    <div class="w-row"><span class="num">CH 5</span><span class="label">計劃及投資</span><div class="w-bar"><div class="fill" style="width:19%"></div></div><span class="pct">19%</span></div>
+    <div class="w-row"><span class="num">CH 6</span><span class="label">職業退休銜接</span><div class="w-bar"><div class="fill" style="width:4%"></div></div><span class="pct">4%</span></div>
+    <div class="w-row"><span class="num">CH 7</span><span class="label">強積金中介人</span><div class="w-bar"><div class="fill" style="width:20%"></div></div><span class="pct">20%</span></div>
+  </div>
+  <p class="meta" style="margin-top:22px; color: rgba(245,247,250,0.55)">來源：練習題庫 PDF P.3 課程比重；內容回溯《研習資料手冊》第九版 1.1–7.4.1。PDF 直接核對：題庫按第1–7章題表呈現，並列參考章節及答案欄。</p>
+</section>
+
+<!-- 04 ch1 divider -->
+<section class="slide hero dark center" data-screen-label="04 第1章封面">
+  <p class="chapter-num">01</p>
+  <h2 class="h-xl" style="color: var(--bg); margin-top: 12px">強制性公積金制度簡介</h2>
+  <p class="lead" style="color: rgba(245,247,250,0.78)">退休保障的需要 · 人口挑戰 · 強積金的誕生 · 在框架下的角色 · 五大特點</p>
+</section>
+
+<!-- 05 ch1.1-1.2 population -->
+<section class="slide light" data-screen-label="05 人口挑戰">
+  <div class="deck-tag">1.1–1.2 退休保障的需要 · 人口挑戰</div>
+  <p class="eyebrow">為何需要強積金</p>
+  <h2 class="h-xl">人口老化是基本面，<br/>退休保障變成必需品。</h2>
+  <ul class="facts two">
+    <li><span class="k">2064</span><span class="v">男性預期壽命 <em>87.0 年</em>、女性 <em>92.5 年</em></span></li>
+    <li><span class="k">2064</span><span class="v">65 歲或以上佔香港總人口 <em>36%</em></span></li>
+    <li><span class="k">2015</span><span class="v">就業人口 ~320 萬，<em>85%</em> 參加了某類退休計劃</span></li>
+    <li><span class="k">PRE-MPF</span><span class="v">強積金實施前，僅約 <em>1/3</em> 就業人口 (~110 萬) 有任何形式退休保障</span></li>
+  </ul>
+  <div class="qcard">
+    <p class="qhead">對應題目 · CH1 Q1 · Q2</p>
+    <p><span class="ans">答 C / A</span>2064 年男 87.0 / 女 92.5；65 歲以上佔 36%。</p>
+  </div>
+  <p class="note">研習資料手冊 1.2 段，數字直接引用。</p>
+</section>
+
+<!-- 06 ch1.3-1.4 pillars -->
+<section class="slide light" data-screen-label="06 安老支柱">
+  <div class="deck-tag">1.3–1.4 強積金的誕生 · 退休保障框架</div>
+  <p class="eyebrow">世界銀行支柱框架</p>
+  <h2 class="h-xl">由三大支柱 (1994)<br/>擴充至五大支柱 (2005)。</h2>
+  <div class="pt-grid">
+    <div class="pt">
+      <h3>1994 · 三大支柱</h3>
+      <p>① 強制性、政府管理、稅收資助的安全網<br/>② 私營機構管理、足額資金的強制供款計劃<br/>③ 自願性的個人保險及儲蓄</p>
+    </div>
+    <div class="pt">
+      <h3>2005 · 新增兩根</h3>
+      <p>＋ 零支柱：無須供款、政府資助及管理的制度<br/>＋ 第四支柱：非正規支援、其他正規社會保障及個人資產</p>
+    </div>
+    <div class="pt">
+      <h3>強積金的位置</h3>
+      <p>強積金 ＝ <strong style="color:var(--accent)">第二支柱</strong><br/>強制性、就業為本、私營管理、具備足額資金的界定供款制度。</p>
+    </div>
+  </div>
+  <div class="qcard">
+    <p class="qhead">對應題目 · CH1 Q3–Q7</p>
+    <p><span class="ans">答 B / B / D / C / B</span>三大支柱不含「強迫性的個人保險」；2005 新增「零支柱+第四支柱」；零支柱＝政府資助及管理的制度；1994 報告倡議「三大安老支柱」。</p>
+  </div>
+</section>
+
+<!-- 07 ch1.5 mpf features -->
+<section class="slide dark" data-screen-label="07 強積金五大特點">
+  <div class="deck-tag">1.5 強積金制度的特點</div>
+  <p class="eyebrow">五項主要特點</p>
+  <h2 class="h-xl" style="color: var(--bg)">五個字記熟：<br/>強、業、定、私、足。</h2>
+  <div class="pipeline">
+    <div class="step"><span class="nb">01 強</span><h3>強制參與</h3><p>所有有關僱主、僱員、自僱人士均須參加，獲豁免人士除外。</p></div>
+    <div class="step"><span class="nb">02 業</span><h3>就業為本</h3><p>僱主選擇受託人及計劃，僱員從中選基金，雙方按入息供款。</p></div>
+    <div class="step"><span class="nb">03 定</span><h3>界定供款</h3><p>權益取決於供款款額及投資回報，並非預先界定的利益。</p></div>
+    <div class="step"><span class="nb">04 私</span><h3>私營機構管理</h3><p>按市場機制運作；2015 年 19 名核准受託人、38 個計劃、459 個成分基金。</p></div>
+  </div>
+  <div class="pipeline" style="grid-template-columns: 1fr; margin-top:18px">
+    <div class="step"><span class="nb">05 足</span><h3>具備足額資金</h3><p>供款一經支付即全數及即時歸屬計劃成員，制度任何時候都有足夠資產履行付款責任。</p></div>
+  </div>
+  <div class="qcard">
+    <p class="qhead">對應題目 · CH1 Q8 · Q9 · Q10–12</p>
+    <p><span class="ans">答 A / A / 320 萬 1/3</span>切合本港需要；特點為強制參與、就業為本、界定供款 (非「界定利益」)；強積金前約 1/3 (110 萬) 工作人口有保障，2015 年累算權益總額 HK$5,910 億。</p>
+  </div>
+</section>
+
+<!-- 08 ch2 divider -->
+<section class="slide hero light center" data-screen-label="08 第2章封面">
+  <p class="chapter-num">02</p>
+  <h2 class="h-xl" style="margin-top:12px">規管架構</h2>
+  <p class="lead">積金局 · 證監會 · 保險業監督 · 金管局 · 強積金法例守則指引</p>
+</section>
+
+<!-- 09 ch2.1 MPFA -->
+<section class="slide light" data-screen-label="09 積金局">
+  <div class="deck-tag">2.1 強制性公積金計劃管理局</div>
+  <p class="eyebrow">積金局 MPFA</p>
+  <h2 class="h-xl">積金局：強積金制度的主理機構。</h2>
+  <p class="lead">負責註冊強積金計劃、批核強積金投資基金及核准匯集投資基金；亦核准受託人、監管計劃及基金的管控事宜、向職業退休計劃授予強積金豁免。</p>
+  <ul class="facts">
+    <li><span class="k">FN 1</span><span class="v">註冊強積金計劃、批核強積金投資基金、核准匯集投資基金</span></li>
+    <li><span class="k">FN 2</span><span class="v">核准受託人、監管計劃及基金的管控事宜</span></li>
+    <li><span class="k">FN 3</span><span class="v">向職業退休計劃授予強積金豁免</span></li>
+    <li><span class="k">FN 4</span><span class="v">監督職業退休計劃 (自 2000 年正式接管職退計劃註冊處)</span></li>
+    <li><span class="k">NOT</span><span class="v"><em>不會</em>為受託人或保管人提供持續財務支援 — 屬陷阱選項</span></li>
+  </ul>
+  <div class="qcard">
+    <p class="qhead">對應題目 · CH2 Q3 · Q4</p>
+    <p><span class="ans">答 B / D</span>主要職能是註冊計劃、批核投資基金、核准匯集投資基金；「提供持續財務支援」不屬積金局職能。</p>
+  </div>
+</section>
+
+<!-- 10 ch2.2.1 SFC -->
+<section class="slide dark" data-screen-label="10 證監會">
+  <div class="deck-tag">2.2.1 證券及期貨事務監察委員會</div>
+  <p class="eyebrow">證監會 SFC</p>
+  <h2 class="h-xl" style="color: var(--bg)">證監會：發牌與披露的把關人。</h2>
+  <ul class="facts">
+    <li><span class="k">FN 1</span><span class="v" style="color:var(--bg)">發牌給投資經理及從事證券借貸的保管人</span></li>
+    <li><span class="k">FN 2</span><span class="v" style="color:var(--bg)">審查資料披露事宜，批核投資經理，審核銷售文件及宣傳資料</span></li>
+    <li><span class="k">FN 3</span><span class="v" style="color:var(--bg)">規管證券市場、期貨市場及槓桿式外匯交易</span></li>
+  </ul>
+  <div class="qcard">
+    <p class="qhead">對應題目 · CH2 Q5 · Q6</p>
+    <p><span class="ans">答 B / C</span>證監會的主要職能是「發牌給投資經理及證券借貸保管人」；負責「審查資料披露、批核投資經理、審核銷售文件及宣傳資料」的也是證監會。</p>
+  </div>
+</section>
+
+<!-- 11 ch2.2.2-2.2.3 IA HKMA -->
+<section class="slide light" data-screen-label="11 保監局與金管局">
+  <div class="deck-tag">2.2.2–2.2.3 保險業監督 · 金融管理專員</div>
+  <p class="eyebrow">其他規管機構</p>
+  <h2 class="h-xl">保險業看償付能力，<br/>金管局看銀行健全。</h2>
+  <div class="ba-grid">
+    <div class="ba-col">
+      <p class="ba-label">保險業監督 IA</p>
+      <h3>確保保險公司有足夠資產履行責任。</h3>
+      <p>《保險業條例》下監管保險公司妥善運作、償付能力，並監管在保險業體系下的強積金中介人。「以上各項皆是」常為正確答案。</p>
+    </div>
+    <div class="ba-col">
+      <p class="ba-label" style="color: var(--accent)">金融管理專員 HKMA</p>
+      <h3>規管參與強積金的銀行，確保財政健全。</h3>
+      <p>香港金融管理局負責規管參與強積金制度的銀行；不是存款公司公會、不是香港銀行公會、也不是證監會。</p>
+    </div>
+  </div>
+  <div class="qcard">
+    <p class="qhead">對應題目 · CH2 Q7–Q10</p>
+    <p><span class="ans">答 D / D / C / C</span>保險業監督確保保險公司有償付能力；保監職能「以上各項皆是」；規管銀行為金融管理專員；中央機構為香港金融管理局。</p>
+  </div>
+</section>
+
+<!-- 12 ch2.3.1-2.3.2 legislation -->
+<section class="slide light" data-screen-label="12 強積金條例與規例">
+  <div class="deck-tag">2.3.1–2.3.2 強積金條例 · 規例</div>
+  <p class="eyebrow">法例層級</p>
+  <h2 class="h-xl">條例 ＝ 強積金法例 主體，<br/>規例 ＝ 條例附屬。</h2>
+  <ul class="facts">
+    <li><span class="k">1995</span><span class="v">制定《強制性公積金計劃條例》</span></li>
+    <li><span class="k">2000</span><span class="v">2000 年 12 月 1 日強積金制度全面實施</span></li>
+    <li><span class="k">ORD</span><span class="v">《強積金條例》＋附屬《強積金規例》＝ <em>強積金法例</em></span></li>
+    <li><span class="k">REG</span><span class="v">規例詳細執行條文：登記、供款、提取、披露等</span></li>
+  </ul>
+  <div class="qcard">
+    <p class="qhead">對應題目 · CH2 Q1 · Q2 · Q11</p>
+    <p><span class="ans">答 B / A / B</span>1995 制定條例、計劃由私營機構管理、僱主負責部分供款；條例 + 規例稱為「強積金法例」。</p>
+  </div>
+</section>
+
+<!-- 13 ch2.3.3-2.3.4 codes guidelines -->
+<section class="slide dark" data-screen-label="13 守則指引">
+  <div class="deck-tag">2.3.3–2.3.4 強積金守則、指引 · 規管中介人條例</div>
+  <p class="eyebrow">守則 · 指引 · 標準</p>
+  <h2 class="h-xl" style="color: var(--bg)">守則是命令式的，<br/>指引是參考性的。</h2>
+  <ul class="facts">
+    <li><span class="k">CODE</span><span class="v" style="color:var(--bg)">強積金守則 — 服務提供者必須遵守，由積金局頒佈</span></li>
+    <li><span class="k">GUIDE</span><span class="v" style="color:var(--bg)">指引 — 分計劃運作、報告規定、發牌、投資等不同範疇</span></li>
+    <li><span class="k">2012</span><span class="v" style="color:var(--bg)">2012 年 11 月起《強積金規管中介人條例》生效，配合 ECA 實施</span></li>
+  </ul>
+  <div class="qcard">
+    <p class="qhead">對應題目 · CH2 Q12 · Q13 · Q14</p>
+    <p><span class="ans">答 A / B / D</span>條文及規例稱「強積金指引」；規定週年報告及內部控制報告的是「報告規定指引」；保險公司可簽發彌償保險單、設立匯集投資基金等 (「以上各項皆是」)。</p>
+  </div>
+</section>
+
+<!-- 14 ch3 divider -->
+<section class="slide hero dark center" data-screen-label="14 第3章封面">
+  <p class="chapter-num">03</p>
+  <h2 class="h-xl" style="color: var(--bg); margin-top: 12px">強積金制度的主要特點</h2>
+  <p class="lead" style="color: rgba(245,247,250,0.78)">考試 45% · 全冊核心 · 計劃資產 → 供款 → 權益 → 提取 → 僱主責任</p>
+</section>
+
+<!-- 15 ch3.1 asset protection -->
+<section class="slide light" data-screen-label="15 計劃資產三重保障">
+  <div class="deck-tag">3.1 計劃資產的保障</div>
+  <p class="eyebrow">三重保障</p>
+  <h2 class="h-xl">信託、彌償、補償基金。<br/>三層共同護航。</h2>
+  <div class="pipeline three">
+    <div class="step"><span class="nb">3.1.1</span><h3>嚴格的認可規定</h3><p>受託人須符合資本充足、財務健全、誠信、能力等認可規定。</p></div>
+    <div class="step"><span class="nb">3.1.2</span><h3>專業彌償保險</h3><p>所有註冊計劃須投保彌償保險，承保因詐騙或疏忽引起的損失。</p></div>
+    <div class="step"><span class="nb">3.1.3</span><h3>補償基金</h3><p>受託人有「業外行為」(misfeasance) 或詐騙造成損失時補償計劃成員。</p></div>
+  </div>
+  <div class="qcard">
+    <p class="qhead">對應題目 · CH3 — 計劃資產保障題群</p>
+    <p><span class="ans">答 三重保障</span>計劃資產保障 ＝ 認可規定 (受託人) ＋ 彌償保險 ＋ 補償基金。任何詢問「以下哪項<em>不</em>屬資產保障」的題目，答案通常是「政府擔保」或「投資保證」一類。</p>
+  </div>
+</section>
+
+<!-- 16 compensation fund -->
+<section class="slide light" data-screen-label="16 補償基金">
+  <div class="deck-tag">3.1.3 補償基金</div>
+  <p class="eyebrow">補償基金 Compensation Fund</p>
+  <h2 class="h-xl">出事時的最後安全網。</h2>
+  <ul class="facts two">
+    <li><span class="k">SOURCE</span><span class="v">由強積金制度的徵費及罰款撥款建立</span></li>
+    <li><span class="k">TRIGGER</span><span class="v">受託人或保管人的<em>業外行為或詐騙</em>致計劃成員蒙受損失</span></li>
+    <li><span class="k">CONTROL</span><span class="v">由<em>積金局</em>管理；非由保險公司管理</span></li>
+    <li><span class="k">SCOPE</span><span class="v">補償<em>累算權益</em>的損失；不補償投資虧損</span></li>
+  </ul>
+  <div class="qcard">
+    <p class="qhead">對應題目 · 補償基金題群</p>
+    <p><span class="ans">記憶要點</span>補償基金<em>不</em>是用作補償投資跌價；只在受託人/保管人不當行為或詐騙時啟動。</p>
+  </div>
+</section>
+
+<!-- 17 ch3.2 appointed service providers -->
+<section class="slide dark" data-screen-label="17 服務提供者">
+  <div class="deck-tag">3.2 獲委任服務提供者</div>
+  <p class="eyebrow">職能分工</p>
+  <h2 class="h-xl" style="color: var(--bg)">受託人是隊長，<br/>其他角色各有專責。</h2>
+  <div class="pt-grid">
+    <div class="pt"><h3 style="color:var(--bg)">投資經理</h3><p>負責計劃資產的投資管理，須由證監會持牌。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">保管人</h3><p>持有及保管計劃資產，與受託人分開以提供保障。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">行政管理人</h3><p>處理供款記帳、成員紀錄、報表等日常運作。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">核數師</h3><p>每年審計計劃的財務報表，獨立向受託人匯報。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">精算師</h3><p>僅於職業退休性質的計劃需要 (主要在第6章)。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">法律顧問</h3><p>就信託契據、規例合規等提供意見。</p></div>
+  </div>
+  <p class="meta" style="color: rgba(245,247,250,0.55); margin-top:16px">受託人對成員負<em>整體責任</em>，即使委任他人代理亦須監察。</p>
+</section>
+
+<!-- 18 ch3.3 plan types -->
+<section class="slide light" data-screen-label="18 計劃種類">
+  <div class="deck-tag">3.3 強積金計劃的種類</div>
+  <p class="eyebrow">三類計劃</p>
+  <h2 class="h-xl">集成 · 僱主營辦 · 行業計劃。</h2>
+  <table class="ref-table">
+    <thead><tr><th>計劃種類</th><th>適用對象</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td class="num">MTS</td><td><em>集成信託計劃</em></td><td>市場上絕大多數計劃，多個僱主、僱員、自僱人士共同參加。</td></tr>
+      <tr><td class="num">ERS</td><td>僱主營辦計劃</td><td>僅一個僱主自設，員工人數及財政須達門檻；轉職須轉走累算權益。</td></tr>
+      <tr><td class="num">IS</td><td>行業計劃</td><td>現時限飲食業 (Catering) 及建造業 (Construction)；同業內轉職可保留。</td></tr>
+    </tbody>
+  </table>
+  <div class="qcard">
+    <p class="qhead">對應題目 · CH3 — 計劃種類題群</p>
+    <p><span class="ans">關鍵字</span>「行業計劃」現時只有飲食業及建造業。「集成信託計劃」是主流。</p>
+  </div>
+</section>
+
+<!-- 19 ch3.4 coverage -->
+<section class="slide light" data-screen-label="19 涵蓋範圍">
+  <div class="deck-tag">3.4 涵蓋範圍</div>
+  <p class="eyebrow">誰須要供款</p>
+  <h2 class="h-xl">滿 18、未滿 65、<br/>受僱滿 60 日。</h2>
+  <ul class="facts two">
+    <li><span class="k">AGE</span><span class="v">18 ≤ 年齡 &lt; 65</span></li>
+    <li><span class="k">JOB</span><span class="v">受僱滿 <em>60 日或以上</em>的有關僱員</span></li>
+    <li><span class="k">SELF</span><span class="v">自僱人士不論年期，皆須登記，除非獲豁免</span></li>
+    <li><span class="k">TEMP</span><span class="v">臨時僱員 (建造、飲食業少於 60 日) — 透過行業計劃即日入會</span></li>
+  </ul>
+  <p class="meta" style="margin-top:16px">「有關僱員」(Relevant Employee) 是強積金法例下的法定身份。</p>
+</section>
+
+<!-- 20 ch3.5 exempt -->
+<section class="slide dark" data-screen-label="20 獲豁免人士">
+  <div class="deck-tag">3.5 獲豁免人士</div>
+  <p class="eyebrow">無須參加強積金</p>
+  <h2 class="h-xl" style="color: var(--bg)">六類豁免：年紀、外籍、家傭、<br/>受職退保障、公務員、司法。</h2>
+  <ul class="facts two">
+    <li><span class="k">AGE</span><span class="v" style="color:var(--bg)">未滿 18 歲或年滿 65 歲或以上的僱員</span></li>
+    <li><span class="k">FOREIGN</span><span class="v" style="color:var(--bg)">海外退休計劃保障的<em>非本地人士</em>，在港工作不超過 13 個月</span></li>
+    <li><span class="k">DOMESTIC</span><span class="v" style="color:var(--bg)">家庭傭工 (Domestic Employees)</span></li>
+    <li><span class="k">ORSO</span><span class="v" style="color:var(--bg)">受獲強積金豁免的職業退休計劃所保障者</span></li>
+    <li><span class="k">PUBLIC</span><span class="v" style="color:var(--bg)">公務員及補助學校教師 (有自己的退休保障制度)</span></li>
+    <li><span class="k">JUDGE</span><span class="v" style="color:var(--bg)">司法人員</span></li>
+  </ul>
+  <p class="meta" style="color: rgba(245,247,250,0.55); margin-top:14px">海外人士若工作超過 13 個月，須開始參加強積金；豁免結束。</p>
+</section>
+
+<!-- 21 ch3.6 employer registration -->
+<section class="slide light" data-screen-label="21 登記責任 僱主">
+  <div class="deck-tag">3.6.1 僱主的責任</div>
+  <p class="eyebrow">登記參加計劃</p>
+  <h2 class="h-xl">僱主在僱員受僱 60 日內<br/>須安排登記。</h2>
+  <ul class="facts two">
+    <li><span class="k">CHOOSE</span><span class="v">僱主先<em>選擇</em>強積金受託人及計劃 (可一個或多個)</span></li>
+    <li><span class="k">60 DAYS</span><span class="v">在僱員開始受僱起<em>60 日內</em>安排登記</span></li>
+    <li><span class="k">INFORM</span><span class="v">向僱員提供書面通知，列明選擇的計劃及受託人</span></li>
+    <li><span class="k">RECORD</span><span class="v">保留有關僱員紀錄至少 <em>7 年</em></span></li>
+    <li><span class="k">TEMP</span><span class="v">建造/飲食業臨時僱員：須立即透過行業計劃登記</span></li>
+  </ul>
+  <p class="meta" style="margin-top:14px">即使僱員月薪低於 MIRI ($7,100)，僱主仍須登記及作 5% 供款。</p>
+</section>
+
+<!-- 22 ch3.6 self-employed + trustee duties -->
+<section class="slide light" data-screen-label="22 自僱 + 受託人登記責任">
+  <div class="deck-tag">3.6.2 自僱人士 · 3.6.3 受託人</div>
+  <p class="eyebrow">登記責任</p>
+  <h2 class="h-xl">自僱自己登記，<br/>受託人核實並出證。</h2>
+  <div class="ba-grid">
+    <div class="ba-col">
+      <p class="ba-label">3.6.2 自僱人士</p>
+      <h3>須在開始自僱起 60 日內自行登記。</h3>
+      <p>選擇任何集成信託計劃；如月入 ≥ $7,100 (或年入 ≥ $85,200) 須供款；不論入息均須登記及維持參加，除非獲豁免。</p>
+    </div>
+    <div class="ba-col">
+      <p class="ba-label" style="color: var(--accent)">3.6.3 受託人</p>
+      <h3>核實成員資料，發出參加確認書。</h3>
+      <p>受託人收到僱主或自僱人士的參加申請後須<em>核實身份</em>、<em>開立帳戶</em>、向成員及積金局發出參加證明書，並於規定時限內報告。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 23 ch3.7 mandatory contribution big stat -->
+<section class="slide hero dark center" data-screen-label="23 強制供款 5%">
+  <div class="eyebrow">3.7.1 強制性供款</div>
+  <p class="stat-num">5<span class="unit">%</span></p>
+  <p class="stat-caption" style="color: rgba(245,247,250,0.78)">僱主、僱員各按有關入息的 5%。<br/>合計 10%，<em>同時受 MIRI / MARI 限制</em>。</p>
+</section>
+
+<!-- 24 ch3.7 MIRI MARI -->
+<section class="slide light" data-screen-label="24 MIRI 與 MARI">
+  <div class="deck-tag">3.7.1 有關入息水平</div>
+  <p class="eyebrow">入息上下限</p>
+  <h2 class="h-xl">$7,100 以下不供款，<br/>$30,000 以上封頂。</h2>
+  <table class="ref-table">
+    <thead><tr><th>水平</th><th>每月</th><th>每年 (自僱)</th><th>應用</th></tr></thead>
+    <tbody>
+      <tr><td>最低有關入息 MIRI</td><td class="num">$7,100</td><td class="num">$85,200</td><td>低於此額：<em>僱員</em>不供，<em>僱主</em>仍須供 5%</td></tr>
+      <tr><td>最高有關入息 MARI</td><td class="num">$30,000</td><td class="num">$360,000</td><td>高於此額：僱員、僱主均以此為計算上限</td></tr>
+    </tbody>
+  </table>
+  <ul class="facts" style="margin-top:14px">
+    <li><span class="k">EXAMPLE</span><span class="v">月入 $2,000：僱員 0、僱主 <em>$100</em> ($2,000 × 5%)</span></li>
+    <li><span class="k">EXAMPLE</span><span class="v">月入 $15,000：僱員 <em>$750</em>、僱主 <em>$750</em></span></li>
+    <li><span class="k">EXAMPLE</span><span class="v">月入 $50,000：僱員 <em>$1,500</em>、僱主 <em>$1,500</em> (各以 MARI 為上限)</span></li>
+  </ul>
+  <p class="meta" style="margin-top:12px">自僱人士無僱主 5%供款；以月或年為基礎計算。</p>
+</section>
+
+<!-- 25 voluntary contributions -->
+<section class="slide light" data-screen-label="25 自願性供款">
+  <div class="deck-tag">3.7.2 自願性供款</div>
+  <p class="eyebrow">VC · Voluntary Contributions</p>
+  <h2 class="h-xl">自願性供款<br/>由僱主、僱員、自僱人士自願決定。</h2>
+  <div class="ba-grid">
+    <div class="ba-col">
+      <p class="ba-label">特性</p>
+      <h3>不受 MIRI / MARI 限制，款額自定。</h3>
+      <p>可隨時開始、停止或更改；受託人會把自願性供款分帳記錄；歸屬可按計劃管限規則設 vesting schedule (而非即時 100%)。</p>
+    </div>
+    <div class="ba-col">
+      <p class="ba-label" style="color: var(--accent)">提取限制</p>
+      <h3>視乎計劃管限規則而定，未必須滿 65 歲。</h3>
+      <p>強制性供款必須滿 65 歲或符合 3.11 特殊情況才能提取；<em>自願性供款</em>的提取條件按個別計劃規則，相對靈活。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 26 TVC -->
+<section class="slide dark" data-screen-label="26 可扣稅自願性供款">
+  <div class="deck-tag">3.7.3 可扣稅自願性供款 TVC</div>
+  <p class="eyebrow">TVC · Tax-deductible Voluntary Contributions</p>
+  <h2 class="h-xl" style="color: var(--bg)">2019 年 4 月 1 日起，<br/>新增稅務優惠通道。</h2>
+  <ul class="facts">
+    <li><span class="k">ELIGIBLE</span><span class="v" style="color:var(--bg)">強積金供款/個人帳戶持有人；獲強積金豁免的職退計劃成員</span></li>
+    <li><span class="k">ACCOUNT</span><span class="v" style="color:var(--bg)">須另開「TVC 帳戶」於自選計劃下，方可扣稅</span></li>
+    <li><span class="k">PRESERVE</span><span class="v" style="color:var(--bg)">TVC 須與<em>強制性供款</em>遵從相同保存規定 (即 65 歲方可提取)</span></li>
+    <li><span class="k">TRANSFER</span><span class="v" style="color:var(--bg)">TVC 帳戶權益可轉移至另一強積金計劃的<em>TVC 帳戶</em>，須<em>整筆</em>過戶</span></li>
+    <li><span class="k">SUMMARY</span><span class="v" style="color:var(--bg)">受託人須於下一財政年度<em>40 日內 (5 月 10 日或之前)</em> 發出供款概要</span></li>
+  </ul>
+</section>
+
+<!-- 27 tax deductions -->
+<section class="slide light" data-screen-label="27 稅項寬減">
+  <div class="deck-tag">3.7.4 稅項寬減</div>
+  <p class="eyebrow">三重扣稅</p>
+  <h2 class="h-xl">$18,000、15%、$60,000。<br/>三個上限要分清。</h2>
+  <table class="ref-table">
+    <thead><tr><th>對象</th><th>類別</th><th>上限</th></tr></thead>
+    <tbody>
+      <tr><td>僱員 / 自僱人士</td><td>強制性供款</td><td class="num">每年 $18,000</td></tr>
+      <tr><td>僱主</td><td>強制 + 自願性供款</td><td class="num">僱員總年薪 15%</td></tr>
+      <tr><td>僱員 / 自僱 / 職退成員</td><td>可扣稅自願性供款 (TVC)</td><td class="num">每年 $60,000*</td></tr>
+    </tbody>
+  </table>
+  <p class="meta" style="margin-top:12px">* $60,000 是<em>TVC + 合資格延期年金保費</em>合計上限，由 2019/20 課稅年度起。</p>
+</section>
+
+<!-- 28 default contribution -->
+<section class="slide light" data-screen-label="28 拖欠供款">
+  <div class="deck-tag">3.7.5 拖欠供款</div>
+  <p class="eyebrow">逾期供款處理</p>
+  <h2 class="h-xl">拖欠供款＝<br/>5% 附加費 + 公開紀錄。</h2>
+  <ul class="facts">
+    <li><span class="k">CONTRIB DAY</span><span class="v">「供款日」＝供款期最後一日後的<em>第 10 日</em> (僱主) / 7 日 (自僱)</span></li>
+    <li><span class="k">SURCHARGE</span><span class="v">拖欠須加付<em>欠款 5%</em> 的附加費 (法定最低)</span></li>
+    <li><span class="k">REPORT</span><span class="v">受託人須於拖欠 10 日內向積金局報告</span></li>
+    <li><span class="k">PENALTY</span><span class="v">積金局可向<em>違規僱主紀錄</em>公開；可循民事或刑事追討</span></li>
+    <li><span class="k">FCO</span><span class="v">積金局可申請「財務罰款」(Financial Penalty Order) 或循小額錢債法庭追討</span></li>
+  </ul>
+</section>
+
+<!-- 29 vesting -->
+<section class="slide dark" data-screen-label="29 權益歸屬">
+  <div class="deck-tag">3.8 權益的歸屬</div>
+  <p class="eyebrow">Vesting</p>
+  <h2 class="h-xl" style="color: var(--bg)">強制性供款 → <em>100% 即時歸屬</em>，<br/>自願性供款 → 按計劃規則。</h2>
+  <ul class="facts">
+    <li><span class="k">MC</span><span class="v" style="color:var(--bg)">強制性供款 (僱主 + 僱員) 一經支付，<em>全數即時歸屬</em>計劃成員</span></li>
+    <li><span class="k">VC</span><span class="v" style="color:var(--bg)">自願性供款的歸屬可按計劃管限規則設 vesting schedule (如年資階梯)</span></li>
+    <li><span class="k">KEY</span><span class="v" style="color:var(--bg)">「具備足額資金」(第1章第5特點) 的法律基礎就在這裡</span></li>
+  </ul>
+</section>
+
+<!-- 30 preservation -->
+<section class="slide light" data-screen-label="30 權益保存">
+  <div class="deck-tag">3.9 權益的保存</div>
+  <p class="eyebrow">Preservation</p>
+  <h2 class="h-xl">強積金的權益必須保存<br/>到 65 歲退休年齡。</h2>
+  <p class="lead">在 65 歲法定退休年齡之前，計劃成員不可以提取由強制性供款及 TVC 所產生的累算權益，除非符合 3.11 節所列六項特殊情況。</p>
+  <ul class="facts">
+    <li><span class="k">RULE</span><span class="v">強制性供款 + TVC 須保存至 <em>65 歲</em></span></li>
+    <li><span class="k">EXCEPT</span><span class="v">六項提早提取理由：見 3.11 節 (slide 35–36)</span></li>
+    <li><span class="k">VC</span><span class="v">純自願性供款 (非 TVC) 的提取按個別計劃管限規則</span></li>
+  </ul>
+</section>
+
+<!-- 31 ECA portability -->
+<section class="slide light" data-screen-label="31 員工自選安排 ECA">
+  <div class="deck-tag">3.10.1 現職有關僱員 · 僱員自選安排</div>
+  <p class="eyebrow">ECA · Employee Choice Arrangement</p>
+  <h2 class="h-xl">2012 年 11 月起：<br/>僱員可一年一次「搬走」自己的部分。</h2>
+  <table class="ref-table">
+    <thead><tr><th>供款帳戶分類</th><th>ECA 實施前</th><th>ECA 實施後</th></tr></thead>
+    <tbody>
+      <tr><td>現職僱主強制性供款</td><td>不可轉移</td><td><em>仍不可轉移</em></td></tr>
+      <tr><td>現職僱員強制性供款</td><td>不可轉移</td><td>可<em>每公曆年一次</em>，一筆過轉至個人帳戶</td></tr>
+      <tr><td>以往受僱/自僱強制性供款</td><td>不可轉移</td><td>可隨時轉至個人帳戶或供款帳戶</td></tr>
+    </tbody>
+  </table>
+  <p class="meta" style="margin-top:12px">即使僱員轉走累算權益，僱主仍須繼續向原計劃供款。</p>
+</section>
+
+<!-- 32 termination + self-employed -->
+<section class="slide dark" data-screen-label="32 終止受僱 + 自僱轉換">
+  <div class="deck-tag">3.10.2–3.10.3 終止受僱 · 自僱轉換</div>
+  <p class="eyebrow">轉職權益處理</p>
+  <h2 class="h-xl" style="color: var(--bg)">轉職時的三種路徑。</h2>
+  <ul class="facts">
+    <li><span class="k">MTS</span><span class="v" style="color:var(--bg)">集成信託計劃成員轉職：可轉至新僱主計劃，<em>或</em>保留在原計劃個人帳戶</span></li>
+    <li><span class="k">ERS</span><span class="v" style="color:var(--bg)">僱主營辦計劃成員轉職：<em>必須轉走</em>累算權益 (不可保留)</span></li>
+    <li><span class="k">IS</span><span class="v" style="color:var(--bg)">行業計劃 (飲食/建造) 業內轉職：可保留在原行業計劃，或轉至集成信託計劃</span></li>
+    <li><span class="k">SELF→EMP</span><span class="v" style="color:var(--bg)">自僱轉受僱：可保留在現有 MTS、轉至另一 MTS/IS、或新僱主計劃</span></li>
+  </ul>
+</section>
+
+<!-- 33 transfer notice -->
+<section class="slide light" data-screen-label="33 成員選擇轉移須知">
+  <div class="deck-tag">3.10.4 成員選擇轉移權益須知</div>
+  <p class="eyebrow">轉移權益須知</p>
+  <h2 class="h-xl">轉移之前，<br/>先做四個檢查。</h2>
+  <div class="pt-grid">
+    <div class="pt"><h3>1. 收費結構</h3><p>新計劃的基金開支比率 (FER)、行政費及其他收費。</p></div>
+    <div class="pt"><h3>2. 基金選擇</h3><p>新計劃是否提供合適的基金種類及預設投資策略。</p></div>
+    <div class="pt"><h3>3. 服務質素</h3><p>網上平台、客戶服務、報告頻率及成員教育。</p></div>
+    <div class="pt"><h3>4. 受託人聲譽</h3><p>核准受託人的合規紀錄及財務狀況。</p></div>
+  </div>
+  <p class="meta" style="margin-top:14px">積金局營辦「強積金基金平台」(Trustee Service Comparative Platform)：基金選擇 · 帳戶管理 · 客戶服務 三方面資訊。</p>
+</section>
+
+<!-- 34 trustee transfer duties -->
+<section class="slide light" data-screen-label="34 受託人轉移責任">
+  <div class="deck-tag">3.10.5 受託人在轉移累算權益方面的責任</div>
+  <p class="eyebrow">原受託人 · 新受託人</p>
+  <h2 class="h-xl">30 日內完成過戶，<br/>並向成員出具結算/確認書。</h2>
+  <div class="ba-grid">
+    <div class="ba-col">
+      <p class="ba-label">原受託人 (轉移受託人)</p>
+      <h3>30 日內把累算權益轉給新受託人。</h3>
+      <p>接獲新受託人通知之後 30 日內，或終止受僱的最後供款日後 30 日內 (以較後者為準) 完成轉移；並向成員提供<em>轉移結算書</em>。</p>
+    </div>
+    <div class="ba-col">
+      <p class="ba-label" style="color: var(--accent)">新受託人 (承轉受託人)</p>
+      <h3>收款後須向成員發出轉移確認書。</h3>
+      <p>新受託人收到從另一計劃轉移過來的累算權益後，必須向成員<em>書面確認</em>所接獲的權益款額。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 35 withdrawal big stat -->
+<section class="slide hero dark center" data-screen-label="35 權益提取">
+  <div class="eyebrow">3.11 權益的提取</div>
+  <p class="chapter-num" style="font-size: clamp(80px, 12vw, 160px)">六</p>
+  <h2 class="h-xl" style="color: var(--bg); margin-top: 16px">六項提早提取理由<br/>＋ 65 歲法定退休。</h2>
+</section>
+
+<!-- 36 withdrawal grounds -->
+<section class="slide light" data-screen-label="36 六項提早提取">
+  <div class="deck-tag">3.11 提取累算權益的條件</div>
+  <p class="eyebrow">提取條件 (a)–(f)</p>
+  <h2 class="h-xl">六項特殊情況，<br/>方可在 65 歲前提取。</h2>
+  <table class="ref-table">
+    <thead><tr><th>條件</th><th>核心要求</th></tr></thead>
+    <tbody>
+      <tr><td class="num">(a)</td><td><em>提早退休</em>：年滿 <em>60 歲</em>，聲明已終止所有受僱/自僱，並無意再次受僱。</td></tr>
+      <tr><td class="num">(b)</td><td><em>永久離開香港</em>：聲明已/將離港定居，提供受託人信納的證明。<em>一生只可一次</em>以此理由提取。</td></tr>
+      <tr><td class="num">(c)</td><td><em>死亡</em>：累算權益屬遺產一部分，由遺產代理人或遺產管理官申索。</td></tr>
+      <tr><td class="num">(d)</td><td><em>完全喪失行為能力</em>：註冊醫生/中醫證明書，永久不適合從事原工作。</td></tr>
+      <tr><td class="num">(e)</td><td><em>罹患末期疾病</em>：醫生證明預期壽命<em>縮短至 12 個月或以下</em>。</td></tr>
+      <tr><td class="num">(f)</td><td><em>小額結餘</em>：單一計劃內 ≤ <em>$5,000</em>；過去 12 個月內無強制性供款；無意再就業；其他計劃無權益。</td></tr>
+    </tbody>
+  </table>
+  <p class="meta" style="margin-top:10px">提早退休 (a) 或 65 歲，可整筆或分期提取；其他理由只可整筆。每年首 4 次分期支付，受託人<em>不可</em>收取費用或罰款。</p>
+</section>
+
+<!-- 37 unclaimed -->
+<section class="slide light" data-screen-label="37 無人申索權益">
+  <div class="deck-tag">3.12 無人申索的權益</div>
+  <p class="eyebrow">Unclaimed Benefits</p>
+  <h2 class="h-xl">受託人不會自動<br/>「沒收」成員的權益。</h2>
+  <ul class="facts">
+    <li><span class="k">KEEP</span><span class="v">即使成員久未認領，權益仍<em>保留在計劃內</em>並繼續投資</span></li>
+    <li><span class="k">SEARCH</span><span class="v">受託人須採取合理步驟<em>尋找</em>計劃成員</span></li>
+    <li><span class="k">REGISTER</span><span class="v">積金局設有「無人申索強積金權益登記冊」協助查找</span></li>
+    <li><span class="k">NO LOSS</span><span class="v">權益不會被沒收、不會被改作其他用途</span></li>
+  </ul>
+</section>
+
+<!-- 38 LSP/SP offset -->
+<section class="slide dark" data-screen-label="38 LSP/SP 抵銷">
+  <div class="deck-tag">3.13 長期服務金 / 遣散費抵銷</div>
+  <p class="eyebrow">LSP / SP Offsetting</p>
+  <h2 class="h-xl" style="color: var(--bg)">僱主可以從<em>其供款部分</em><br/>抵銷 LSP / SP。</h2>
+  <ul class="facts">
+    <li><span class="k">SCOPE</span><span class="v" style="color:var(--bg)">抵銷只能用<em>僱主供款部分</em>所產生的累算權益；不能動用僱員的供款</span></li>
+    <li><span class="k">TYPES</span><span class="v" style="color:var(--bg)">可抵銷的是長期服務金 (LSP) 及遣散費 (SP)</span></li>
+    <li><span class="k">FORM</span><span class="v" style="color:var(--bg)">僱員可直接從計劃支取，亦可由僱主先付後從計劃取回</span></li>
+    <li><span class="k">REFORM</span><span class="v" style="color:var(--bg)">2025 年起政策改變方向 (取消抵銷)，但<em>本研習資料以現行制度為準</em></span></li>
+  </ul>
+</section>
+
+<!-- 39 ch3.14 employer duties -->
+<section class="slide light" data-screen-label="39 僱主主要責任">
+  <div class="deck-tag">3.14 僱主的主要責任</div>
+  <p class="eyebrow">Employer's duties</p>
+  <h2 class="h-xl">選 → 登記 → 供款 → 報告。</h2>
+  <div class="pipeline">
+    <div class="step"><span class="nb">01</span><h3>選擇計劃</h3><p>選擇核准受託人及一個或多個強積金計劃。</p></div>
+    <div class="step"><span class="nb">02</span><h3>登記僱員</h3><p>在僱員受僱起 60 日內安排登記，並書面通知。</p></div>
+    <div class="step"><span class="nb">03</span><h3>準時供款</h3><p>每個供款期完結後 10 日內 (供款日) 之前支付供款。</p></div>
+    <div class="step"><span class="nb">04</span><h3>離職通知</h3><p>有關僱員 (臨時除外) 離職須於下次供款日<em>連同備註</em>通知受託人。</p></div>
+  </div>
+  <p class="meta" style="margin-top:14px">紀錄須保留至少 7 年；違規可被列入違規僱主紀錄。</p>
+</section>
+
+<!-- 40 ch3.15 non-compliance record -->
+<section class="slide light" data-screen-label="40 違規僱主紀錄">
+  <div class="deck-tag">3.15 違規僱主及高級人員紀錄</div>
+  <p class="eyebrow">公眾名單</p>
+  <h2 class="h-xl">屢次違規會被掛上<br/>積金局網站的「曬名」名單。</h2>
+  <ul class="facts">
+    <li><span class="k">WHO</span><span class="v">違反強積金法例的<em>僱主</em>及其<em>高級人員</em>都會被記錄</span></li>
+    <li><span class="k">PUBLIC</span><span class="v">紀錄向公眾披露，於積金局網站可查閱</span></li>
+    <li><span class="k">REMOVE</span><span class="v">違規紀錄於指定期間後可被剔除 (合規後)</span></li>
+    <li><span class="k">DETERRENT</span><span class="v">公開名單對<em>累犯</em>及高級人員具阻嚇作用</span></li>
+  </ul>
+</section>
+
+<!-- 41 ch3 summary -->
+<section class="slide dark" data-screen-label="41 第3章重點速記">
+  <div class="deck-tag">第3章 速記</div>
+  <p class="eyebrow">Chapter 3 cheat sheet</p>
+  <h2 class="h-xl" style="color: var(--bg)">第3章 ＝ 45%。<br/>記熟以下八個數字。</h2>
+  <ul class="facts two">
+    <li><span class="k">5%</span><span class="v" style="color:var(--bg)">僱主、僱員各按入息 5% 強制供款</span></li>
+    <li><span class="k">$7,100</span><span class="v" style="color:var(--bg)">MIRI — 僱員以下免供，僱主仍供</span></li>
+    <li><span class="k">$30,000</span><span class="v" style="color:var(--bg)">MARI — 雙方以此為計算上限</span></li>
+    <li><span class="k">$18k</span><span class="v" style="color:var(--bg)">僱員/自僱強制供款每年扣稅上限</span></li>
+    <li><span class="k">15%</span><span class="v" style="color:var(--bg)">僱主供款扣稅上限 (年薪百分比)</span></li>
+    <li><span class="k">$60k</span><span class="v" style="color:var(--bg)">TVC + 年金合計每年扣稅上限</span></li>
+    <li><span class="k">60 日</span><span class="v" style="color:var(--bg)">受僱滿 60 日 → 登記強積金</span></li>
+    <li><span class="k">30 日</span><span class="v" style="color:var(--bg)">原受託人完成轉移權益的限期</span></li>
+  </ul>
+</section>
+
+<!-- 42 ch4 divider -->
+<section class="slide hero light center" data-screen-label="42 第4章封面">
+  <p class="chapter-num">04</p>
+  <h2 class="h-xl" style="margin-top:12px">強積金受託人</h2>
+  <p class="lead">信託安排 · 分類 · 核准 · 持續監察 · 合規標準 · 制裁罰則</p>
+</section>
+
+<!-- 43 ch4.1 trust -->
+<section class="slide light" data-screen-label="43 信託安排">
+  <div class="deck-tag">4.1 信託安排</div>
+  <p class="eyebrow">Trust arrangement</p>
+  <h2 class="h-xl">信託把「擁有人」<br/>跟「使用人」分開。</h2>
+  <div class="pt-grid">
+    <div class="pt"><h3>4.1.1 信託概念</h3><p>由信託人 (受託人) 為受益人 (計劃成員) 持有及管理資產。</p></div>
+    <div class="pt"><h3>4.1.2 受信責任</h3><p>受託人須以最高<em>誠信</em>、勤勉、技巧、注意管理計劃資產，以受益人最佳利益為依歸。</p></div>
+    <div class="pt"><h3>4.1.3 追索權</h3><p>計劃成員可循民事追究受託人違反受信責任所造成的損失。</p></div>
+  </div>
+  <ul class="facts" style="margin-top: 18px">
+    <li><span class="k">PROS</span><span class="v">4.1.4 信託安排優點：資產獨立、不受僱主或服務商債務牽連；受託人受嚴格規管。</span></li>
+  </ul>
+</section>
+
+<!-- 44 ch4.2 trustee types -->
+<section class="slide dark" data-screen-label="44 受託人分類">
+  <div class="deck-tag">4.2 受託人的分類</div>
+  <p class="eyebrow">三類受託人</p>
+  <h2 class="h-xl" style="color: var(--bg)">本地公司、離岸公司、個人；<br/>用途和門檻不同。</h2>
+  <div class="ba-grid">
+    <div class="ba-col">
+      <p class="ba-label">公司受託人 Corporate</p>
+      <h3>集成信託計劃及行業計劃，必須由公司受託人管理。</h3>
+      <p>分為本地公司及離岸公司。離岸公司須受積金局接納的離岸監管機構監管，而當地信託法及公司法須相當於香港相關法律。</p>
+    </div>
+    <div class="ba-col">
+      <p class="ba-label" style="color: var(--accent)">個人受託人 Individual</p>
+      <h3>只可擔任僱主營辦計劃的受託人。</h3>
+      <p>須通常居於香港、聲譽及品格良好；如委任自然人成為受託人，必須委任至少兩名，並提供履行職能擔保。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 45 ch4.3-4.5 -->
+<section class="slide light" data-screen-label="45 職能 + 核准 + 監察">
+  <div class="deck-tag">4.3–4.5 職能 · 核准 · 持續監察</div>
+  <p class="eyebrow">受託人三件事</p>
+  <h2 class="h-xl">職能 → 核准 → 持續監察。</h2>
+  <div class="pt-grid">
+    <div class="pt"><h3>4.3 職能</h3><p>持有及管理計劃資產、確保供款入帳、安排基金投資、付款給受益人、處理成員紀錄、向積金局報告。</p></div>
+    <div class="pt"><h3>4.4 核准</h3><p>須由積金局核准；申請時須證明資本充足、財務健全、誠信、能力、健全的內部監控。</p></div>
+    <div class="pt"><h3>4.5 持續監察</h3><p>積金局可發出查詢、要求提供文件、進行現場巡視；受託人須<em>持續</em>符合核准條件。</p></div>
+  </div>
+</section>
+
+<!-- 46 ch4.6-4.7 compliance -->
+<section class="slide light" data-screen-label="46 合規標準 + 制裁">
+  <div class="deck-tag">4.6–4.7 合規標準 · 制裁及罰則</div>
+  <p class="eyebrow">罰則層級</p>
+  <h2 class="h-xl">罰款 → 撤銷核准 → 訴訟。</h2>
+  <ul class="facts two">
+    <li><span class="k">4.6</span><span class="v">《強積金核准受託人合規標準》訂明受託人須持續達到的標準</span></li>
+    <li><span class="k">4.7</span><span class="v">違規後果：書面警告 / 譴責 / 罰款 / 暫停或撤銷核准</span></li>
+    <li><span class="k">FCO</span><span class="v">積金局可徵收<em>財務罰款</em>及向法庭申請命令</span></li>
+    <li><span class="k">CRIME</span><span class="v">嚴重違規可循刑事檢控</span></li>
+  </ul>
+</section>
+
+<!-- 47 ch5 divider -->
+<section class="slide hero dark center" data-screen-label="47 第5章封面">
+  <p class="chapter-num">05</p>
+  <h2 class="h-xl" style="color: var(--bg); margin-top:12px">強積金計劃及投資</h2>
+  <p class="lead" style="color: rgba(245,247,250,0.78)">計劃註冊 · 成分基金 · 預設投資策略 DIS · 投資限制 · 收費 · 披露</p>
+</section>
+
+<!-- 48 ch5.1 registration -->
+<section class="slide light" data-screen-label="48 計劃及基金核准">
+  <div class="deck-tag">5.1 強積金計劃的註冊</div>
+  <p class="eyebrow">兩道核准門</p>
+  <h2 class="h-xl">先註冊強積金計劃，<br/>再批核成分基金。</h2>
+  <ul class="facts two">
+    <li><span class="k">PLAN</span><span class="v">註冊強積金計劃由<em>積金局</em>負責</span></li>
+    <li><span class="k">FUND</span><span class="v">批核計劃下的<em>強積金投資基金</em>由積金局負責 (但投資經理須證監會持牌)</span></li>
+    <li><span class="k">APIF</span><span class="v">「核准匯集投資基金」(APIF) 須由<em>積金局</em>核准</span></li>
+    <li><span class="k">SFC</span><span class="v">證監會就<em>銷售文件及宣傳資料</em>的披露另行審核</span></li>
+  </ul>
+</section>
+
+<!-- 49 ch5.2 plans -->
+<section class="slide light" data-screen-label="49 強積金計劃">
+  <div class="deck-tag">5.2 強積金計劃</div>
+  <p class="eyebrow">三類計劃 (回顧)</p>
+  <h2 class="h-xl">集成信託 · 僱主營辦 · 行業計劃。</h2>
+  <p class="lead">本章從<em>投資角度</em>看計劃結構：每個計劃須包含至少一個成分基金；強積金保守基金、預設投資策略 (DIS) 為法例必須提供的元件。</p>
+  <ul class="facts">
+    <li><span class="k">MUST</span><span class="v">每個計劃<em>必須提供</em>：強積金保守基金 + 預設投資策略 (DIS)</span></li>
+    <li><span class="k">CHOICE</span><span class="v">成員可自選成分基金組合；如未作選擇，按 DIS 投資</span></li>
+  </ul>
+</section>
+
+<!-- 50 ch5.3 fund types -->
+<section class="slide dark" data-screen-label="50 成分基金種類">
+  <div class="deck-tag">5.3.2 成分基金的種類</div>
+  <p class="eyebrow">六類成分基金</p>
+  <h2 class="h-xl" style="color: var(--bg)">由保守到進取，<br/>風險階梯一字排開。</h2>
+  <table class="ref-table" style="color: var(--bg)">
+    <thead><tr><th style="color: rgba(245,247,250,0.55)">類別</th><th style="color: rgba(245,247,250,0.55)">特點</th></tr></thead>
+    <tbody>
+      <tr><td class="num">CON</td><td style="color: var(--bg)">強積金<em>保守基金</em> — 短期港元存款及貨幣工具，回報接近港元利率</td></tr>
+      <tr><td class="num">MMF</td><td style="color: var(--bg)">貨幣市場基金 (非保守) — 多元市場貨幣工具</td></tr>
+      <tr><td class="num">GUAR</td><td style="color: var(--bg)"><em>保證基金</em> — 提供保本或最低回報保證，附條件</td></tr>
+      <tr><td class="num">BOND</td><td style="color: var(--bg)">債券基金 — 政府/企業債券</td></tr>
+      <tr><td class="num">MIXED</td><td style="color: var(--bg)">混合資產基金 — 股債混合，DIS 即屬此類</td></tr>
+      <tr><td class="num">EQUITY</td><td style="color: var(--bg)">股票基金 — 港股、中港、亞洲、環球等</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 51 conservative fund -->
+<section class="slide light" data-screen-label="51 強積金保守基金">
+  <div class="deck-tag">5.3.2 強積金保守基金</div>
+  <p class="eyebrow">MPF Conservative Fund</p>
+  <h2 class="h-xl">每個強積金計劃<br/>必須提供保守基金。</h2>
+  <ul class="facts two">
+    <li><span class="k">SCOPE</span><span class="v">只投資於港元短期存款及貨幣市場工具</span></li>
+    <li><span class="k">FEE</span><span class="v">「<em>節省式</em>」收費 — 一個月港元定期存款利率 (HIBID) 以上才能收取費用</span></li>
+    <li><span class="k">RETURN</span><span class="v">回報接近港元短期利率，<em>不保證資本</em></span></li>
+    <li><span class="k">PURPOSE</span><span class="v">為高度避險、接近退休的計劃成員提供短期穩定的選擇</span></li>
+  </ul>
+</section>
+
+<!-- 52 DIS introduction -->
+<section class="slide light" data-screen-label="52 預設投資策略 DIS">
+  <div class="deck-tag">5.4 預設投資策略 DIS</div>
+  <p class="eyebrow">Default Investment Strategy</p>
+  <h2 class="h-xl">2017 年 4 月 1 日起：<br/>沒選基金，自動 DIS。</h2>
+  <p class="lead">DIS 是為沒有作出投資選擇的計劃成員而設的法定預設安排；其他成員若認為適合，也可主動選用。</p>
+  <ul class="facts">
+    <li><span class="k">2-FUND</span><span class="v">DIS 包含兩個成分基金：<em>核心累積基金 (CAF)</em> 及 <em>65 歲後基金 (A65F)</em>，均屬混合資產基金</span></li>
+    <li><span class="k">CAF</span><span class="v">CAF 投資約 <em>60%</em> 於較高風險資產 (環球分散股票)、約 40% 較低風險資產</span></li>
+    <li><span class="k">A65F</span><span class="v">A65F 投資約 <em>20%</em> 於較高風險資產、約 80% 較低風險資產</span></li>
+  </ul>
+</section>
+
+<!-- 53 DIS de-risking -->
+<section class="slide dark" data-screen-label="53 DIS 降低風險">
+  <div class="deck-tag">5.4 DIS 降低風險安排</div>
+  <p class="eyebrow">Age-based de-risking</p>
+  <h2 class="h-xl" style="color: var(--bg)">50 歲起每年自動<br/>由 CAF 移向 A65F。</h2>
+  <table class="ref-table" style="color: var(--bg)">
+    <thead><tr><th style="color: rgba(245,247,250,0.55)">年齡</th><th style="color: rgba(245,247,250,0.55)">核心累積基金 CAF</th><th style="color: rgba(245,247,250,0.55)">65歲後基金 A65F</th></tr></thead>
+    <tbody>
+      <tr><td class="num">≤ 49</td><td style="color: var(--bg)">100%</td><td style="color: var(--bg)">0%</td></tr>
+      <tr><td class="num">50</td><td style="color: var(--bg)">93.3%</td><td style="color: var(--bg)">6.7%</td></tr>
+      <tr><td class="num">55</td><td style="color: var(--bg)">60%</td><td style="color: var(--bg)">40%</td></tr>
+      <tr><td class="num">60</td><td style="color: var(--bg)">26.7%</td><td style="color: var(--bg)">73.3%</td></tr>
+      <tr><td class="num">≥ 64</td><td style="color: var(--bg)">0%</td><td style="color: var(--bg)">100%</td></tr>
+    </tbody>
+  </table>
+  <p class="meta" style="color: rgba(245,247,250,0.55); margin-top:10px">由 50 至 64 歲，逐年贖回 CAF 單位、相應購入 A65F 單位；無鎖定期；不設資本或回報保證。</p>
+</section>
+
+<!-- 54 DIS fee cap -->
+<section class="slide light" data-screen-label="54 DIS 收費上限">
+  <div class="deck-tag">5.4 DIS 收費及開支上限</div>
+  <p class="eyebrow">Statutory fee caps</p>
+  <h2 class="h-xl">0.75% + 0.20%。<br/>法定上限不可超。</h2>
+  <ul class="facts two">
+    <li><span class="k">MGMT</span><span class="v">管理費用 ≤ 基金<em>每年淨資產值 0.75%</em></span></li>
+    <li><span class="k">RECUR</span><span class="v">經常性開支 ≤ 基金<em>每年淨資產值 0.20%</em></span></li>
+    <li><span class="k">DAILY</span><span class="v">以日為單位計算 (0.75% ÷ 年度日數)</span></li>
+    <li><span class="k">SCOPE</span><span class="v">包括<em>受託人/保管人/行政管理人/投資經理</em>及獲轉授人的服務費</span></li>
+  </ul>
+</section>
+
+<!-- 55 ch5.5 APIF -->
+<section class="slide light" data-screen-label="55 匯集投資基金">
+  <div class="deck-tag">5.5 核准匯集投資基金 APIF</div>
+  <p class="eyebrow">Approved Pooled Investment Fund</p>
+  <h2 class="h-xl">成分基金通常透過<br/>APIF 進行實際投資。</h2>
+  <div class="ba-grid">
+    <div class="ba-col">
+      <p class="ba-label">5.5.1 核准</p>
+      <h3>APIF 須由積金局核准。</h3>
+      <p>核准前須符合資產分散、流動性、估值、披露等規定；APIF 受託人/管理人須符合資格。</p>
+    </div>
+    <div class="ba-col">
+      <p class="ba-label" style="color: var(--accent)">5.5.2 種類</p>
+      <h3>單位信託或保險單。</h3>
+      <p>(i) 單位信託形式 — 在香港或合資格地區成立；(ii) 保險單類別 — 由獲認可保險公司簽發。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 56 ch5.6 SIPP -->
+<section class="slide dark" data-screen-label="56 投資政策陳述書">
+  <div class="deck-tag">5.6 投資政策陳述書</div>
+  <p class="eyebrow">SIPP · Statement of Investment Policy</p>
+  <h2 class="h-xl" style="color: var(--bg)">每個成分基金 / APIF<br/>都要有一份 SIPP。</h2>
+  <ul class="facts">
+    <li><span class="k">REQUIRED</span><span class="v" style="color:var(--bg)">受託人須為每個成分基金及 APIF<em>準備並維持</em>一份 SIPP</span></li>
+    <li><span class="k">CONTENT</span><span class="v" style="color:var(--bg)">列明投資目標、政策、限制、貨幣選擇、衍生工具使用等</span></li>
+    <li><span class="k">DISCLOSE</span><span class="v" style="color:var(--bg)">SIPP 須<em>向計劃成員披露</em>，並於要約文件中載明</span></li>
+    <li><span class="k">UPDATE</span><span class="v" style="color:var(--bg)">投資政策有重大變動須<em>事先通知</em>計劃成員</span></li>
+  </ul>
+</section>
+
+<!-- 57 ch5.7 investment limits + HKD -->
+<section class="slide light" data-screen-label="57 投資限制與港元風險">
+  <div class="deck-tag">5.7 投資標準及限制</div>
+  <p class="eyebrow">Permitted investments</p>
+  <h2 class="h-xl">分散、流動、低風險，<br/>港元曝險至少 30%。</h2>
+  <ul class="facts">
+    <li><span class="k">PERMITTED</span><span class="v">准許投資項目：上市股票、政府/企業債券、銀行存款、認可基金等；衍生工具有限度使用</span></li>
+    <li><span class="k">CONCENTRATION</span><span class="v">單一發行人/集團上限通常為 10%；單一發行人債券例外可放寬至 30%</span></li>
+    <li><span class="k">LIQUIDITY</span><span class="v">須有充足流動性以應付贖回及付款</span></li>
+    <li><span class="k">HKD</span><span class="v">每個成分基金<em>至少 30%</em> 須投資於港元計值資產 (港元貨幣風險規定)</span></li>
+  </ul>
+</section>
+
+<!-- 58 ch5.8 fees FER -->
+<section class="slide light" data-screen-label="58 費用及收費 FER">
+  <div class="deck-tag">5.8 費用及收費</div>
+  <p class="eyebrow">Fund Expense Ratio</p>
+  <h2 class="h-xl">FER 是最直觀的<br/>「貴或便宜」指標。</h2>
+  <ul class="facts two">
+    <li><span class="k">FER</span><span class="v">基金開支比率 ＝ 全年總開支 ÷ 平均淨資產值</span></li>
+    <li><span class="k">DISCLOSE</span><span class="v">須在<em>基金便覽及周年報告</em>中披露</span></li>
+    <li><span class="k">COMPARE</span><span class="v">積金局網站「基金平台」可作 FER 比較</span></li>
+    <li><span class="k">DIS CAP</span><span class="v">DIS 受 0.75% + 0.20% 法定上限</span></li>
+  </ul>
+</section>
+
+<!-- 59 ch5.9 switching -->
+<section class="slide dark" data-screen-label="59 計劃/基金轉換">
+  <div class="deck-tag">5.9 計劃 / 成分基金的轉換</div>
+  <p class="eyebrow">Fund switching</p>
+  <h2 class="h-xl" style="color: var(--bg)">基金可隨時轉換，<br/>計劃可一年一次 (ECA)。</h2>
+  <ul class="facts">
+    <li><span class="k">FUND</span><span class="v" style="color:var(--bg)">同一計劃內<em>成分基金轉換</em>：通常無限制次數，受託人不可收費 (一年首 4 次)</span></li>
+    <li><span class="k">PLAN</span><span class="v" style="color:var(--bg)">轉<em>另一計劃</em>：依 ECA 規則，<em>現職僱員強制供款每年一次</em></span></li>
+    <li><span class="k">TIME</span><span class="v" style="color:var(--bg)">受託人須在合理時間內執行 — 通常數個工作天</span></li>
+  </ul>
+</section>
+
+<!-- 60 ch5.10 disclosure -->
+<section class="slide light" data-screen-label="60 披露守則 + 持續監察">
+  <div class="deck-tag">5.10–5.11 披露守則 · 持續監察</div>
+  <p class="eyebrow">Disclosure code</p>
+  <h2 class="h-xl">基金便覽、周年權益報表、<br/>表現報告：一份不能少。</h2>
+  <div class="pt-grid">
+    <div class="pt"><h3>5.10 披露守則</h3><p>《強積金投資基金披露守則》規定基金便覽 (Fund Fact Sheet)、要約文件、表現年報的格式及內容。</p></div>
+    <div class="pt"><h3>5.9(e) 周年權益報表</h3><p>受託人須每年向成員發出周年權益報表，列明累算權益、供款、回報、收費。</p></div>
+    <div class="pt"><h3>5.11 持續監察</h3><p>積金局持續監察基金表現、收費及合規情況；可要求受託人補救或處罰。</p></div>
+  </div>
+</section>
+
+<!-- 61 ch6 divider -->
+<section class="slide hero light center" data-screen-label="61 第6章封面">
+  <p class="chapter-num">06</p>
+  <h2 class="h-xl" style="margin-top:12px">職業退休計劃與強積金的銜接</h2>
+  <p class="lead">職退種類 · 強積金豁免 · 比較 · 銜接安排 · 對成員的影響</p>
+</section>
+
+<!-- 62 ch6.1 ORSO types -->
+<section class="slide light" data-screen-label="62 職退計劃分類">
+  <div class="deck-tag">6.1 職業退休計劃的種類</div>
+  <p class="eyebrow">三維度分類</p>
+  <h2 class="h-xl">權益形式 × 註冊狀況 × 是否強積金豁免。</h2>
+  <div class="pt-grid">
+    <div class="pt"><h3>6.1.1 權益種類</h3><p><em>界定利益</em> (DB)：預先承諾退休利益。<em>界定供款</em> (DC)：定供款，利益視乎回報。</p></div>
+    <div class="pt"><h3>6.1.2 註冊還是豁免</h3><p>職退<em>註冊計劃</em>：須向職退處註冊。<em>職退豁免計劃</em>：符合特定條件可獲免註冊 (如海外計劃)。</p></div>
+    <div class="pt"><h3>6.1.3 強積金豁免</h3><p>獲積金局授予<em>強積金豁免</em>：成員無須再參加強積金，由原職退計劃繼續保障。</p></div>
+  </div>
+</section>
+
+<!-- 63 ch6.2-6.3 comparison + exempt criteria -->
+<section class="slide dark" data-screen-label="63 比較 + 豁免準則">
+  <div class="deck-tag">6.2 特點比較 · 6.3 豁免準則</div>
+  <p class="eyebrow">強積金 vs 職退</p>
+  <h2 class="h-xl" style="color: var(--bg)">強積金強制，<br/>職退自願。</h2>
+  <table class="ref-table" style="color: var(--bg)">
+    <thead><tr><th style="color: rgba(245,247,250,0.55)">維度</th><th style="color: rgba(245,247,250,0.55)">強積金</th><th style="color: rgba(245,247,250,0.55)">職業退休</th></tr></thead>
+    <tbody>
+      <tr><td>性質</td><td style="color: var(--bg)">強制</td><td style="color: var(--bg)">自願</td></tr>
+      <tr><td>權益形式</td><td style="color: var(--bg)">界定供款</td><td style="color: var(--bg)">DB 或 DC</td></tr>
+      <tr><td>規管機關</td><td style="color: var(--bg)">積金局</td><td style="color: var(--bg)">職退處 (現由積金局接管)</td></tr>
+      <tr><td>豁免</td><td style="color: var(--bg)">職退豁免可換取</td><td style="color: var(--bg)">符合準則可獲強積金豁免</td></tr>
+    </tbody>
+  </table>
+  <p class="meta" style="color: rgba(245,247,250,0.55); margin-top:10px">6.3 豁免準則：須登記為職退註冊計劃、符合長期利益、繼續供款、計劃利益至少等同強積金等。</p>
+</section>
+
+<!-- 64 ch6.4-6.6 -->
+<section class="slide light" data-screen-label="64 銜接 + 成員選擇">
+  <div class="deck-tag">6.4–6.6 銜接安排 · 成員選擇 · 持續規定</div>
+  <p class="eyebrow">職退強積金實施後</p>
+  <h2 class="h-xl">現有 vs 新員工，<br/>選擇權不一樣。</h2>
+  <ul class="facts">
+    <li><span class="k">EXIST</span><span class="v">6.5.1 <em>現有成員</em>可選擇留在職退豁免計劃；6.5.2 或選擇參加強積金</span></li>
+    <li><span class="k">NEW</span><span class="v">6.5.3 <em>新的有資格僱員</em>可選擇加入該職退豁免計劃 (僱主同意下) 或強積金</span></li>
+    <li><span class="k">CHOICE</span><span class="v">僱員自選須在受僱後合理時間內做出，並書面通知僱主</span></li>
+    <li><span class="k">6.6</span><span class="v">獲豁免的職退計劃須<em>持續</em>符合：保留紀錄、定期報告、保留審計師、維持資金及保險等</span></li>
+  </ul>
+</section>
+
+<!-- 65 ch7 divider -->
+<section class="slide hero dark center" data-screen-label="65 第7章封面">
+  <p class="chapter-num">07</p>
+  <h2 class="h-xl" style="color: var(--bg); margin-top:12px">強積金中介人</h2>
+  <p class="lead" style="color: rgba(245,247,250,0.78)">考試 20% · 操守指引 · 受規管活動 · 註冊要求 · 紀律處分</p>
+</section>
+
+<!-- 66 ch7.1 -->
+<section class="slide light" data-screen-label="66 中介人規管總覽">
+  <div class="deck-tag">7.1 強積金中介人的規管</div>
+  <p class="eyebrow">法定七大範疇</p>
+  <h2 class="h-xl">由禁止、註冊、操守，<br/>到上訴與紀律。</h2>
+  <ul class="facts two">
+    <li><span class="k">(a)</span><span class="v">對進行受規管活動的禁止</span></li>
+    <li><span class="k">(b)</span><span class="v">強積金中介人的<em>註冊要求</em></span></li>
+    <li><span class="k">(c)</span><span class="v">前線監督的規管範圍</span></li>
+    <li><span class="k">(d)</span><span class="v">註冊中介人的<em>操守要求</em></span></li>
+    <li><span class="k">(e)</span><span class="v">註冊中介人的其他要求</span></li>
+    <li><span class="k">(f)</span><span class="v">監管及紀律制裁權力</span></li>
+    <li><span class="k">(g)</span><span class="v">有關註冊及紀律制裁決定的上訴機制</span></li>
+  </ul>
+</section>
+
+<!-- 67 ch7.2.1 RA definition -->
+<section class="slide light" data-screen-label="67 受規管活動定義">
+  <div class="deck-tag">7.2.1 受規管活動 · 關鍵決定</div>
+  <p class="eyebrow">RA · Regulated Activity</p>
+  <h2 class="h-xl">兩種行為 ＝ 受規管活動。</h2>
+  <ul class="facts">
+    <li><span class="k">RA(i)</span><span class="v"><em>邀請或誘使</em>另一人作出「關鍵決定」(或企圖如此)</span></li>
+    <li><span class="k">RA(ii)</span><span class="v">就關鍵決定提供「<em>受規管意見</em>」</span></li>
+    <li><span class="k">EXEMPT</span><span class="v">如發出獲<em>證監會根據《證券及期貨條例》第 105 條認可</em>的廣告/邀請/文件 → <em>不屬</em>受規管活動</span></li>
+  </ul>
+  <h3 class="h-md" style="margin-top:18px">「關鍵決定」十項：</h3>
+  <ul class="facts two" style="font-size: 14px">
+    <li><span class="k">(i)–(iv)</span><span class="v">是否/何時/多少 — 加入、以僱主身份參與、供款、款額</span></li>
+    <li><span class="k">(v)–(vi)</span><span class="v">是否/何時/多少 — 轉移權益 (跨計劃或跨成分基金)</span></li>
+    <li><span class="k">(vii)–(viii)</span><span class="v">是否/何時/多少 — 從職退轉移至強積金</span></li>
+    <li><span class="k">(ix)–(x)</span><span class="v">是否/何時/多少 — 提出累算權益申索</span></li>
+  </ul>
+</section>
+
+<!-- 68 ch7.2.1 PI/SI definition -->
+<section class="slide dark" data-screen-label="68 主事 vs 附屬">
+  <div class="deck-tag">7.2.1(a) 受規管者的定義</div>
+  <p class="eyebrow">Principal vs Subsidiary Intermediary</p>
+  <h2 class="h-xl" style="color: var(--bg)">主事是公司，<br/>附屬是個人。</h2>
+  <div class="ba-grid">
+    <div class="ba-col">
+      <p class="ba-label" style="color: rgba(245,247,250,0.6)">主事中介人 PI</p>
+      <h3 style="color: var(--bg)">獲積金局註冊可進行受規管活動的商業實體。</h3>
+      <p style="color: rgba(245,247,250,0.72)"><em>甲類</em>受規管者；通常是銀行、保險、證券、強積金中介公司。</p>
+    </div>
+    <div class="ba-col">
+      <p class="ba-label" style="color: var(--accent)">附屬中介人 SI</p>
+      <h3 style="color: var(--bg)">獲積金局註冊可為其所隸屬的主事進行受規管活動的個人。</h3>
+      <p style="color: rgba(245,247,250,0.72)">必須<em>隸屬於至少一個主事中介人</em>；不得自行招攬。</p>
+    </div>
+  </div>
+  <p class="meta" style="color: rgba(245,247,250,0.55); margin-top:12px">「受規管者」 ＝ (i) 註冊中介人 (PI 或 SI) ＋ (ii) 主事中介人的負責人員 (RO)。</p>
+</section>
+
+<!-- 69 ch7.2.2 registration -->
+<section class="slide light" data-screen-label="69 註冊要求">
+  <div class="deck-tag">7.2.2 強積金中介人的註冊要求</div>
+  <p class="eyebrow">註冊條件</p>
+  <h2 class="h-xl">註冊就是「資格 + 操守 + 隸屬」。</h2>
+  <ul class="facts">
+    <li><span class="k">PI</span><span class="v">主事 — 在另一規管機構 (證監會/保監/金管) 下持牌或註冊；<em>內部監控及合規制度</em>達標</span></li>
+    <li><span class="k">SI</span><span class="v">附屬 — 通過<em>強積金中介人考試</em>；無紀律問題；<em>隸屬</em>於指明主事中介人；個人為適當人選</span></li>
+    <li><span class="k">RO</span><span class="v">主事中介人須指定一名以上<em>負責人員</em>監督附屬中介人</span></li>
+    <li><span class="k">VALIDITY</span><span class="v">註冊持續有效，受持續操守及 CPD 規定約束</span></li>
+  </ul>
+</section>
+
+<!-- 70 ch7.2.3 frontline -->
+<section class="slide light" data-screen-label="70 前線監督">
+  <div class="deck-tag">7.2.3 前線監督</div>
+  <p class="eyebrow">Frontline Regulators</p>
+  <h2 class="h-xl">積金局 + 三大前線：<br/>證監、保監、金管。</h2>
+  <table class="ref-table">
+    <thead><tr><th>前線監督</th><th>規管範圍</th></tr></thead>
+    <tbody>
+      <tr><td>證監會 SFC</td><td>持證監會牌照的中介人 (證券業)</td></tr>
+      <tr><td>保險業監督 IA</td><td>持保險中介人牌照者 (保險業)</td></tr>
+      <tr><td>金融管理專員 HKMA</td><td>銀行體系下的中介人</td></tr>
+      <tr><td>積金局 MPFA</td><td>持有強積金註冊但不屬上述前線者，由積金局直接規管</td></tr>
+    </tbody>
+  </table>
+  <p class="meta" style="margin-top:12px">前線監督協助積金局進行<em>第一線監察、調查、紀律</em>工作。</p>
+</section>
+
+<!-- 71 ch7.2.4 conduct -->
+<section class="slide dark" data-screen-label="71 操守要求">
+  <div class="deck-tag">7.2.4 註冊中介人的操守要求</div>
+  <p class="eyebrow">Conduct Requirements</p>
+  <h2 class="h-xl" style="color: var(--bg)">八條操守原則，<br/>違反即可被紀律處分。</h2>
+  <div class="pt-grid">
+    <div class="pt"><h3 style="color:var(--bg)">1. 誠實 · 公平</h3><p>誠實、誠信、公平地行事，符合客戶最佳利益。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">2. 客戶最佳利益</h3><p>客戶利益<em>優先</em>於中介人或主事的利益。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">3. 應有的技巧</h3><p>以應有的<em>技巧、謹慎及勤勉</em>進行受規管活動。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">4. 適合性</h3><p>所提供的<em>意見</em>須適合客戶情況及需要。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">5. 資料披露</h3><p>給予客戶<em>準確完整</em>的資料及風險披露。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">6. 利益衝突</h3><p>盡量避免；無可避免時須<em>披露</em>並公平處理。</p></div>
+  </div>
+  <ul class="facts" style="margin-top: 14px">
+    <li><span class="k">7</span><span class="v" style="color:var(--bg)">客戶資料保密 — 除法定情況外不得披露</span></li>
+    <li><span class="k">8</span><span class="v" style="color:var(--bg)">遵守相關法例、規例、守則、指引及操守規定</span></li>
+  </ul>
+</section>
+
+<!-- 72 ch7.2.5 other requirements CPD -->
+<section class="slide light" data-screen-label="72 其他要求 CPD">
+  <div class="deck-tag">7.2.5 註冊中介人的其他要求</div>
+  <p class="eyebrow">CPD · 紀錄 · 通知</p>
+  <h2 class="h-xl">每年至少 10 CPD 學分，<br/>其中 2 學分為核心。</h2>
+  <ul class="facts">
+    <li><span class="k">CPD</span><span class="v"><em>持續專業培訓</em>：每年最少 <em>10 學分</em>，其中 <em>2 學分</em>須與強積金法例/核心題目相關</span></li>
+    <li><span class="k">RECORDS</span><span class="v">保留 CPD 紀錄不少於 <em>3 年</em>，供積金局/前線監督查閱</span></li>
+    <li><span class="k">NOTIFY</span><span class="v">如有資料變動 (聯絡、隸屬、紀律問題)，須在 <em>14 日內</em>通知積金局</span></li>
+    <li><span class="k">RENEWAL</span><span class="v">註冊每年續期；未達 CPD 要求可被拒</span></li>
+  </ul>
+</section>
+
+<!-- 73 ch7.2.6 enforcement -->
+<section class="slide light" data-screen-label="73 紀律處分權力">
+  <div class="deck-tag">7.2.6 監管及紀律處分權力</div>
+  <p class="eyebrow">Disciplinary powers</p>
+  <h2 class="h-xl">由<em>譴責</em>到<em>撤銷</em>。<br/>輕重六級。</h2>
+  <ul class="facts">
+    <li><span class="k">1</span><span class="v">公開或私下<em>譴責</em>注冊中介人</span></li>
+    <li><span class="k">2</span><span class="v">徵收<em>罰款</em> (Financial Penalty)</span></li>
+    <li><span class="k">3</span><span class="v">附加註冊條件</span></li>
+    <li><span class="k">4</span><span class="v">暫停註冊</span></li>
+    <li><span class="k">5</span><span class="v">撤銷註冊</span></li>
+    <li><span class="k">6</span><span class="v">命令中介人不得申請註冊指定期間</span></li>
+  </ul>
+  <p class="meta" style="margin-top:14px">積金局可徵收罰款上限： $500,000 或違規所獲利潤三倍 (以較高者為準)。</p>
+</section>
+
+<!-- 74 ch7.2.7 appeal -->
+<section class="slide dark" data-screen-label="74 上訴機制">
+  <div class="deck-tag">7.2.7 上訴機制</div>
+  <p class="eyebrow">Appeal mechanism</p>
+  <h2 class="h-xl" style="color: var(--bg)">不服？可上訴至<br/>強積金計劃上訴委員會。</h2>
+  <ul class="facts">
+    <li><span class="k">BODY</span><span class="v" style="color:var(--bg)">獨立的<em>強積金計劃上訴委員會</em> (MPF Schemes Appeal Board)</span></li>
+    <li><span class="k">SCOPE</span><span class="v" style="color:var(--bg)">針對<em>註冊及紀律制裁決定</em>的上訴</span></li>
+    <li><span class="k">TIME</span><span class="v" style="color:var(--bg)">通常須在收到決定通知後<em>21 日內</em>提出上訴</span></li>
+    <li><span class="k">DECISION</span><span class="v" style="color:var(--bg)">上訴委員會可確認、修改或撤銷積金局決定</span></li>
+  </ul>
+</section>
+
+<!-- 75 ch7.2.8 public disclosure -->
+<section class="slide light" data-screen-label="75 公眾披露">
+  <div class="deck-tag">7.2.8 紀律制裁公眾披露</div>
+  <p class="eyebrow">Public disclosure</p>
+  <h2 class="h-xl">紀律決定<br/>會在積金局網站公佈。</h2>
+  <ul class="facts">
+    <li><span class="k">WHAT</span><span class="v">針對註冊中介人的紀律制裁決定詳情</span></li>
+    <li><span class="k">WHERE</span><span class="v">積金局網站「中介人公眾紀錄冊」</span></li>
+    <li><span class="k">PURPOSE</span><span class="v">保障公眾免於不當銷售；阻嚇違規</span></li>
+    <li><span class="k">SCOPE</span><span class="v">含主事/附屬中介人及其負責人員</span></li>
+  </ul>
+</section>
+
+<!-- 76 ch7.3 complaints -->
+<section class="slide light" data-screen-label="76 處理投訴">
+  <div class="deck-tag">7.3 處理針對中介人的投訴</div>
+  <p class="eyebrow">Complaint handling</p>
+  <h2 class="h-xl">投訴有兩條路：<br/>積金局 或 前線監督。</h2>
+  <div class="pipeline three">
+    <div class="step"><span class="nb">01</span><h3>收到投訴</h3><p>積金局或前線監督接獲書面投訴；保密處理。</p></div>
+    <div class="step"><span class="nb">02</span><h3>初步調查</h3><p>核實事實、要求相關方提供文件、進行訪問。</p></div>
+    <div class="step"><span class="nb">03</span><h3>紀律 / 結案</h3><p>查證屬實 → 啟動紀律程序 (見 7.2.6)；查無實據 → 結案並通知投訴人。</p></div>
+  </div>
+  <p class="meta" style="margin-top:14px">積金局與前線監督透過《合作備忘錄》分工。</p>
+</section>
+
+<!-- 77 ch7.4 conduct code core -->
+<section class="slide dark" data-screen-label="77 操守指引核心">
+  <div class="deck-tag">7.4.1《註冊中介人操守要求指引》</div>
+  <p class="eyebrow">《操守指引》</p>
+  <h2 class="h-xl" style="color: var(--bg)">操守指引 10 部，<br/>核心覆蓋 i–v 部。</h2>
+  <ul class="facts">
+    <li><span class="k">PART I</span><span class="v" style="color:var(--bg)">總則與適用範圍 — 適用於所有 PI/SI/RO</span></li>
+    <li><span class="k">PART II</span><span class="v" style="color:var(--bg)"><em>誠信、公平、客戶最佳利益</em>等八項操守原則</span></li>
+    <li><span class="k">PART III</span><span class="v" style="color:var(--bg)"><em>了解客戶</em> KYC — 收集財務狀況、投資目標、風險承受能力</span></li>
+    <li><span class="k">PART IV</span><span class="v" style="color:var(--bg)">提供<em>適合的意見</em> — 必須有書面紀錄</span></li>
+    <li><span class="k">PART V</span><span class="v" style="color:var(--bg)">向客戶<em>披露</em> — 重要事實、收費、利益衝突</span></li>
+  </ul>
+</section>
+
+<!-- 78 ch7.4 conduct vi-x -->
+<section class="slide light" data-screen-label="78 操守指引其餘部分">
+  <div class="deck-tag">7.4.1《操守指引》第 vi–x 部</div>
+  <p class="eyebrow">PART vi–x</p>
+  <h2 class="h-xl">紀錄、培訓、投訴、<br/>主事責任、執行。</h2>
+  <ul class="facts two">
+    <li><span class="k">vi</span><span class="v">保留紀錄 (≥ 7 年銷售文件)、會議備忘、客戶簽署文件</span></li>
+    <li><span class="k">vii</span><span class="v">CPD 培訓要求 — 每年 10 學分，2 學分核心</span></li>
+    <li><span class="k">viii</span><span class="v">內部投訴處理機制；接獲投訴須通知主事中介人</span></li>
+    <li><span class="k">ix</span><span class="v">主事中介人的<em>監督責任</em>：負責人員監察附屬</span></li>
+    <li><span class="k">x</span><span class="v">遵守一切相關法例、規例、守則、指引</span></li>
+  </ul>
+  <p class="meta" style="margin-top:14px">違反《操守指引》＝可被積金局/前線監督紀律處分。</p>
+</section>
+
+<!-- 79 cheat sheet -->
+<section class="slide dark" data-screen-label="79 速查考點表">
+  <div class="deck-tag">速查考點表</div>
+  <p class="eyebrow">Cheat sheet</p>
+  <h2 class="h-xl" style="color: var(--bg)">考試前最後一遍，<br/>記熟這些數字。</h2>
+  <ul class="facts two">
+    <li><span class="k">壽命 2064</span><span class="v" style="color:var(--bg)">男 87.0 / 女 92.5</span></li>
+    <li><span class="k">65+ 比例</span><span class="v" style="color:var(--bg)">36% (2064 預測)</span></li>
+    <li><span class="k">支柱</span><span class="v" style="color:var(--bg)">1994 三大 → 2005 五大；強積金 ＝ 第二支柱</span></li>
+    <li><span class="k">特點</span><span class="v" style="color:var(--bg)">強、業、定、私、足 (5 項)</span></li>
+    <li><span class="k">供款</span><span class="v" style="color:var(--bg)">5% × 2；MIRI $7,100 / MARI $30,000</span></li>
+    <li><span class="k">扣稅</span><span class="v" style="color:var(--bg)">$18k / 15% / $60k (TVC + 年金)</span></li>
+    <li><span class="k">登記</span><span class="v" style="color:var(--bg)">受僱 60 日 → 登記；自僱 60 日內自行登記</span></li>
+    <li><span class="k">提取</span><span class="v" style="color:var(--bg)">65 歲 ＋ 6 例外 (60/離港/死/失能/末期/$5k)</span></li>
+    <li><span class="k">轉移</span><span class="v" style="color:var(--bg)">30 日內完成；ECA 每年一次</span></li>
+    <li><span class="k">DIS</span><span class="v" style="color:var(--bg)">CAF + A65F；50 歲起降風險；費用 0.75%+0.20%</span></li>
+    <li><span class="k">港元</span><span class="v" style="color:var(--bg)">每成分基金 ≥ 30% 港元資產</span></li>
+    <li><span class="k">CPD</span><span class="v" style="color:var(--bg)">10 學分 / 年，2 學分核心；紀錄保 3 年</span></li>
+  </ul>
+</section>
+
+<!-- 80 pdf top-up: compensation fund + trustee thresholds -->
+<section class="slide light" data-screen-label="80 PDF補強 徵費與受託人">
+  <div class="deck-tag">PDF 題庫補強 · 3.1.3 · 4.4 · 5.3</div>
+  <p class="eyebrow">Direct PDF audit</p>
+  <h2 class="h-xl">補償基金與受託人門檻，<br/>題庫問得很細。</h2>
+  <div class="pt-grid two">
+    <div class="pt"><h3>補償基金</h3><p>政府提供 <em>$6 億</em> 創辦基金；其餘來自按計劃淨資產值 <em>0.03%</em> 收取的計劃徵費。</p></div>
+    <div class="pt"><h3>自動觸發徵費</h3><p>儲備跌至 <em>$10 億</em> 自動恢復徵費；升至 <em>$14 億</em> 自動暫停徵費。</p></div>
+    <div class="pt"><h3>公司受託人</h3><p>須擁有至少 <em>$1.5 億</em> 繳足股本及等值淨資產，並具合適董事、內控、香港規模及控制權。</p></div>
+    <div class="pt"><h3>個人受託人</h3><p>須通常居於香港、聲譽良好；履行職能擔保為計劃淨資產值 <em>10%</em>，上限 <em>$1,000 萬</em>。</p></div>
+  </div>
+</section>
+
+<!-- 81 pdf top-up: contribution dates -->
+<section class="slide dark" data-screen-label="81 PDF補強 供款日期">
+  <div class="deck-tag">PDF 題庫補強 · 3.7.1</div>
+  <p class="eyebrow">Contribution timing</p>
+  <h2 class="h-xl" style="color: var(--bg)">供款日題目最愛考：<br/>60 日、30 日、10 日。</h2>
+  <ul class="facts two">
+    <li><span class="k">60 DAYS</span><span class="v" style="color:var(--bg)">非臨時僱員：僱主須在受僱首 60 日特准限期內安排登記</span></li>
+    <li><span class="k">30 DAYS</span><span class="v" style="color:var(--bg)">非臨時僱員：僱員供款期不包括受僱首 30 日或之前開始的工資期</span></li>
+    <li><span class="k">DUE DAY</span><span class="v" style="color:var(--bg)">一般供款日取較後者：供款期月份完結後第 10 日，或特准限期月份完結後第 10 日</span></li>
+    <li><span class="k">CASUAL</span><span class="v" style="color:var(--bg)">臨時僱員特准限期為受僱首 10 日；行業計劃可按下一工作日或期後第 10 日供款</span></li>
+    <li><span class="k">REMIT</span><span class="v" style="color:var(--bg)">僱主供款時須向受託人提交付款結算書，列明有關入息及供款款額</span></li>
+    <li><span class="k">RECORD</span><span class="v" style="color:var(--bg)">支付月內最後一次供款後 <em>7 個工作日</em>內，向僱員提供每月供款紀錄</span></li>
+  </ul>
+</section>
+
+<!-- 82 pdf top-up: self-employed persons -->
+<section class="slide light" data-screen-label="82 PDF補強 自僱供款">
+  <div class="deck-tag">PDF 題庫補強 · 3.4 · 3.6.2 · 3.7.1</div>
+  <p class="eyebrow">Self-employed persons</p>
+  <h2 class="h-xl">自僱人士沒有僱主 5%，<br/>但仍受 MIRI / MARI 管。</h2>
+  <div class="pt-grid two">
+    <div class="pt"><h3>誰是自僱人士</h3><p>並非以僱員身分收取有關入息，而是在香港提供貨品或服務所得入息的人；獨資、合夥、小販等題型常見。</p></div>
+    <div class="pt"><h3>供款額</h3><p>按有關入息 <em>5%</em> 作強制性供款；沒有僱主配對供款。月入低於 MIRI 時無須作強制供款。</p></div>
+    <div class="pt"><h3>供款期選擇</h3><p>可選按月或按年供款；供款日為供款期最後一日，遇假日或惡劣天氣則順延。</p></div>
+    <div class="pt"><h3>30 日報告</h3><p>每個計劃財政期終結前至少 <em>30 日</em>，向受託人報告下一財政期有關入息及按年/按月供款選擇。</p></div>
+  </div>
+</section>
+
+<!-- 83 pdf top-up: termination and transfer edge cases -->
+<section class="slide light" data-screen-label="83 PDF補強 轉移邊界">
+  <div class="deck-tag">PDF 題庫補強 · 3.10 · 3.12 · 3.14</div>
+  <p class="eyebrow">Portability edge cases</p>
+  <h2 class="h-xl">轉移題不是只問「30 日」，<br/>還問誰通知、轉去哪裡。</h2>
+  <ul class="facts two">
+    <li><span class="k">30 DAYS</span><span class="v">原受託人接獲轉移通知後，一般須在 30 日內把累算權益轉至新受託人</span></li>
+    <li><span class="k">ECA</span><span class="v">僱員自選安排只動用現職僱員自己供款部分；現職僱主供款部分留在原供款帳戶</span></li>
+    <li><span class="k">LEAVE</span><span class="v">僱員離職時，僱主須在離職月份完結後 10 日內以書面通知受託人</span></li>
+    <li><span class="k">MISSING</span><span class="v">若前僱主失聯或拒絕通知，僱員可向受託人書面聲明終止受僱及日期</span></li>
+    <li><span class="k">UNCLAIMED</span><span class="v">無人申索權益不會歸受託人；受託人須追查、公告，並按規定處理</span></li>
+    <li><span class="k">LSP/SP</span><span class="v">抵銷只可動用僱主供款所產生的累算權益，不能動用僱員供款部分</span></li>
+  </ul>
+</section>
+
+<!-- 84 pdf top-up: fund fees and switching -->
+<section class="slide dark" data-screen-label="84 PDF補強 收費轉換">
+  <div class="deck-tag">PDF 題庫補強 · 5.8 · 5.9 · 5.10</div>
+  <p class="eyebrow">Fees and switching</p>
+  <h2 class="h-xl" style="color: var(--bg)">轉換基金可以，<br/>亂收費不可以。</h2>
+  <div class="pt-grid two">
+    <div class="pt"><h3 style="color:var(--bg)">收費披露</h3><p>受託人須清楚說明現行及最高收費；修訂最高收費前須先獲積金局及證監會核准。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">保守基金</h3><p>只有基金回報高於訂明儲蓄利率時計行政開支；首次費用、贖回費及買賣差價一律不得徵收。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">轉換權</h3><p>計劃成員每年至少可更改成分基金一次；僱主轉計劃時須把僱員累算權益轉至新計劃。</p></div>
+    <div class="pt"><h3 style="color:var(--bg)">轉移收費</h3><p>除落實轉移所需的必要交易費用/買賣差價外，受託人不得收取費用或施加罰款。</p></div>
+  </div>
+</section>
+
+<!-- 85 pdf top-up: ORSO transition -->
+<section class="slide light" data-screen-label="85 PDF補強 職退銜接">
+  <div class="deck-tag">PDF 題庫補強 · 6.4 · 6.5 · 6.6</div>
+  <p class="eyebrow">ORSO transition</p>
+  <h2 class="h-xl">職退銜接題，<br/>「增補」就是 MPF 以外再加保障。</h2>
+  <ul class="facts two">
+    <li><span class="k">EXEMPT</span><span class="v">強積金豁免職退計劃的成員，可不另行參加強積金，但最低強積金利益仍受保存、可調動及提取規則限制</span></li>
+    <li><span class="k">OPTIONS</span><span class="v">僱主可停止接受新僱員加入職退計劃、停止未來供款，或重組現行計劃提供增補利益</span></li>
+    <li><span class="k">TOP-UP</span><span class="v">增補計劃：所有僱員參加強積金，同時保留現有退休保障計劃，以加強強積金以外的保障</span></li>
+    <li><span class="k">CHOICE</span><span class="v">僱主須向成員提供足夠資料，讓現有成員或合資格新僱員作出選擇</span></li>
+  </ul>
+</section>
+
+<!-- 86 pdf top-up: intermediary penalty numbers -->
+<section class="slide dark" data-screen-label="86 PDF補強 中介罰則">
+  <div class="deck-tag">PDF 題庫補強 · 7.2.1 · 7.2.5 · 7.2.6</div>
+  <p class="eyebrow">Intermediary penalty numbers</p>
+  <h2 class="h-xl" style="color: var(--bg)">第7章數字少，<br/>但很愛考罰則。</h2>
+  <ul class="facts two">
+    <li><span class="k">UNREG</span><span class="v" style="color:var(--bg)">未獲豁免而進行受規管活動：最高 <em>$500萬 + 7年</em>；簡易程序最高 <em>$50萬 + 2年</em></span></li>
+    <li><span class="k">AGENT</span><span class="v" style="color:var(--bg)">以另一人的僱員/代理/代表身分違規：公訴最高 <em>$100萬 + 2年</em></span></li>
+    <li><span class="k">TITLE</span><span class="v" style="color:var(--bg)">非法使用主事/附屬中介人稱銜：最高 <em>$10萬</em>，持續罪行每日另罰</span></li>
+    <li><span class="k">CHANGE</span><span class="v" style="color:var(--bg)">姓名、地址/聯絡資料、負責人員身分等改變須 <em>7 個工作天</em>內書面通知積金局；未通知最高 <em>$50,000</em></span></li>
+    <li><span class="k">CPD</span><span class="v" style="color:var(--bg)">未完成指明訓練時，積金局可書面要求 <em>30 日</em>內或指定較長期間完成；不遵從可暫時撤銷註冊</span></li>
+    <li><span class="k">ADS</span><span class="v" style="color:var(--bg)">未獲證監會認可向公眾發出強積金廣告/邀請/文件：最高 <em>$50萬 + 3年</em></span></li>
+  </ul>
+</section>
+
+<!-- 87 paper 4 top-up: conduct basics -->
+<section class="slide light" data-screen-label="87 卷四補強 操守底線">
+  <div class="deck-tag">2019卷四補強 · 指引 III.6 · III.8–11</div>
+  <p class="eyebrow">Conduct baseline</p>
+  <h2 class="h-xl">操守題先抓底線：<br/>不回佣、守保密、客戶優先。</h2>
+  <ul class="facts two">
+    <li><span class="k">NO REBATE</span><span class="v">不可直接或間接提供回佣、禮物或優待，以促使客戶成為成員、供款、轉移權益或繼續保留成員身分。</span></li>
+    <li><span class="k">DATA</span><span class="v">避免不當使用業務過程中取得的個人資料。</span></li>
+    <li><span class="k">CONFIDENTIAL</span><span class="v">客戶資料須視為機密，除法例准許外不得披露或使用。</span></li>
+    <li><span class="k">BEST INTEREST</span><span class="v">銷售、推銷及提供受規管意見時，必須符合客戶最佳利益。</span></li>
+    <li><span class="k">COMPLAINTS</span><span class="v">因受規管活動引致的投訴要迅速及公平處理；題目說「只由內部職員處理」通常要小心。</span></li>
+  </ul>
+</section>
+
+<!-- 88 paper 4 top-up: product due diligence and records -->
+<section class="slide dark" data-screen-label="88 卷四補強 產品查證與紀錄">
+  <div class="deck-tag">2019卷四補強 · 指引 III.12 · III.14–16</div>
+  <p class="eyebrow">Product due diligence</p>
+  <h2 class="h-xl" style="color: var(--bg)">主事做產品查證，<br/>指令紀錄至少七年。</h2>
+  <ul class="facts two">
+    <li><span class="k">BASIC</span><span class="v" style="color:var(--bg)">概括瞭解強積金制度、註冊計劃/成分基金種類，以及風險與回報等基本投資概念；不是預測每個基金回報。</span></li>
+    <li><span class="k">GOOD KNOWLEDGE</span><span class="v" style="color:var(--bg)">良好認識自己推銷/提供意見的計劃及基金、主要營運/分銷人士、費用及收費、投資政策及條款。</span></li>
+    <li><span class="k">DUE DILIGENCE</span><span class="v" style="color:var(--bg)">主事中介人在銷售或提供受規管意見前，須對相關計劃/成分基金進行產品查證，並定期持續更新。</span></li>
+    <li><span class="k">RECORD</span><span class="v" style="color:var(--bg)">涉及關鍵決定的客戶指令須記錄日期、時間及詳情；指令紀錄由主事中介人保存最少 <em>7 年</em>。</span></li>
+  </ul>
+</section>
+
+<!-- 89 paper 4 top-up: special care customers -->
+<section class="slide light" data-screen-label="89 卷四補強 特別照顧客戶">
+  <div class="deck-tag">2019卷四補強 · 指引 III.18–19</div>
+  <p class="eyebrow">Special care customers</p>
+  <h2 class="h-xl">「特別照顧」不是低收入，<br/>而是未必能明白或作重要決定。</h2>
+  <ul class="facts two">
+    <li><span class="k">WHO</span><span class="v">包括文盲、教育水平較低 (小學或以下)，以及因視障、聽障或其他障礙而影響獨立作重要決定的人。</span></li>
+    <li><span class="k">NOT ENOUGH</span><span class="v">低收入、投資知識較低或投資經驗較少，本身不一定等於「需要特別照顧」。</span></li>
+    <li><span class="k">CHOICE</span><span class="v">可安排朋友陪同/見證，或安排多一名員工見證；選擇及確認文件也要保存。</span></li>
+    <li><span class="k">CALL</span><span class="v">售後確認電話須由獲主事中介人授權、且不是進行該活動的附屬中介人，在售後 <em>7 個工作天</em>內進行。</span></li>
+    <li><span class="k">NO REC</span><span class="v">主事中介人沒有錄音系統時，須與核准受託人/保薦人/推銷商安排，由其中一方的獲授權人士致電客戶。</span></li>
+  </ul>
+</section>
+
+<!-- 90 paper 4 top-up: KYC and suitability triggers -->
+<section class="slide dark" data-screen-label="90 卷四補強 KYC與適合性觸發">
+  <div class="deck-tag">2019卷四補強 · 指引 III.24–26</div>
+  <p class="eyebrow">KYC and suitability trigger</p>
+  <h2 class="h-xl" style="color: var(--bg)">了解客戶適用所有客戶；<br/>適合性評估看是否涉及基金選擇。</h2>
+  <ul class="facts two">
+    <li><span class="k">KYC</span><span class="v" style="color:var(--bg)">協助僱主、自僱人士、僱員或個人帳戶持有人參與/登記時，須核實身分並對客戶有基本認識。</span></li>
+    <li><span class="k">BASIC INFO</span><span class="v" style="color:var(--bg)">例子包括僱主業務性質、客戶教育水平；題目問適用對象時，四類客戶都包括。</span></li>
+    <li><span class="k">TRIGGER</span><span class="v" style="color:var(--bg)">邀請、誘使或向特定客戶提供受規管意見，令其選擇某特定成分基金時，要做適合性評估。</span></li>
+    <li><span class="k">ALSO</span><span class="v" style="color:var(--bg)">詳細意見如涉及提早提取累算權益，或自願性供款款額，也宜因應客戶特定情況評估。</span></li>
+  </ul>
+</section>
+
+<!-- 91 paper 4 top-up: suitability steps -->
+<section class="slide light" data-screen-label="91 卷四補強 適合性步驟">
+  <div class="deck-tag">2019卷四補強 · 指引 III.27–28</div>
+  <p class="eyebrow">Suitability assessment</p>
+  <h2 class="h-xl">適合性評估四步：<br/>了解、配對、解釋、簽收。</h2>
+  <ul class="facts two">
+    <li><span class="k">1 KNOW</span><span class="v">了解客戶個人情況：現有投資組合 (包括強積金)、年齡/預計退休年齡、財政狀況、投資目標、知識、經驗、風險承受及願意承受程度。</span></li>
+    <li><span class="k">NOT GENDER</span><span class="v">題目常混入「性別」作干擾；性別不是評估風險狀況的指定重點。</span></li>
+    <li><span class="k">2 MATCH</span><span class="v">把客戶風險狀況與成分基金風險水平配對，揀選適合客戶的基金。</span></li>
+    <li><span class="k">3 EXPLAIN</span><span class="v">向客戶解釋為何某基金適合其情況。</span></li>
+    <li><span class="k">4 SIGN</span><span class="v">提供載有客戶風險狀況及解釋的文件，要求客戶簽署；副本給客戶，正本由主事保存最少 <em>7 年</em>。</span></li>
+  </ul>
+</section>
+
+<!-- 92 paper 4 top-up: risk mismatch -->
+<section class="slide dark" data-screen-label="92 卷四補強 風險錯配">
+  <div class="deck-tag">2019卷四補強 · 指引 III.29–30</div>
+  <p class="eyebrow">Risk mismatch</p>
+  <h2 class="h-xl" style="color: var(--bg)">風險錯配只考一件事：<br/>客戶堅持選高於其風險狀況的基金。</h2>
+  <ul class="facts two">
+    <li><span class="k">DEFINITION</span><span class="v" style="color:var(--bg)">經適合性評估後，客戶仍堅持把供款投資於、或把累算權益轉移至風險水平高於其風險狀況的成分基金。</span></li>
+    <li><span class="k">WARN</span><span class="v" style="color:var(--bg)">告知客戶有風險錯配，並清楚解釋基金特點、風險及可能不適合。</span></li>
+    <li><span class="k">CONFIRM</span><span class="v" style="color:var(--bg)">確認基金選擇是客戶自己的決定，並要求客戶給出選擇理由。</span></li>
+    <li><span class="k">RECORD</span><span class="v" style="color:var(--bg)">把錯配、解釋、客戶決定及理由記錄在案，要求客戶簽署確認；保存最少 <em>7 年</em>。</span></li>
+    <li><span class="k">CALL</span><span class="v" style="color:var(--bg)">沒有錄音時，售後確認/致電須在 <em>7 個工作天</em>內完成。</span></li>
+  </ul>
+</section>
+
+<!-- 93 paper 4 top-up: initial disclosure -->
+<section class="slide light" data-screen-label="93 卷四補強 首次披露">
+  <div class="deck-tag">2019卷四補強 · 指引 III.32–35</div>
+  <p class="eyebrow">Initial disclosure</p>
+  <h2 class="h-xl">首次接觸客戶，<br/>身分、主事、利益都要講清楚。</h2>
+  <ul class="facts two">
+    <li><span class="k">CARD</span><span class="v">附屬中介人須出示印有註冊姓名及強積金註冊編號的名片。</span></li>
+    <li><span class="k">PRINCIPAL</span><span class="v">披露主事中介人的名稱、主要營業地點、業務性質，以及適用於其註冊的相關條件。</span></li>
+    <li><span class="k">CAPACITY</span><span class="v">說明當時以甚麼身分行事，如為保薦人、推銷商或核准受託人分銷計劃，要述明。</span></li>
+    <li><span class="k">BENEFIT</span><span class="v">披露主事/附屬中介人會否直接收費或以佣金、花紅等方式取得金錢或非金錢利益。</span></li>
+    <li><span class="k">MULTI-PI</span><span class="v">附屬中介人代表多於一名主事中介人時，須清楚表明該次業務活動代表哪一個主事中介人。</span></li>
+  </ul>
+</section>
+
+<!-- 94 paper 4 top-up: guaranteed fund and default fund -->
+<section class="slide dark" data-screen-label="94 卷四補強 保證基金與預設基金">
+  <div class="deck-tag">2019卷四補強 · 指引 III.39 · III.47–49</div>
+  <p class="eyebrow">Guaranteed fund and default fund</p>
+  <h2 class="h-xl" style="color: var(--bg)">轉出保證基金前，<br/>先警告、再記錄、要簽署。</h2>
+  <ul class="facts two">
+    <li><span class="k">DEFAULT</span><span class="v" style="color:var(--bg)">邀請/誘使客戶參加或轉移計劃時，要告知：如不選成分基金，供款會自動投資於該計劃的<em>預設基金</em>。</span></li>
+    <li><span class="k">INTO GF</span><span class="v" style="color:var(--bg)">轉入保證基金：解釋條款、保證條件，以及保險單形式保證基金的較大交易對手/信貸風險。</span></li>
+    <li><span class="k">OUT OF GF</span><span class="v" style="color:var(--bg)">轉出保證基金：警告客戶可能因未符合保證條件而喪失保證。</span></li>
+    <li><span class="k">CHECK DOC</span><span class="v" style="color:var(--bg)">建議客戶先查閱原來計劃要約文件，或向核准受託人查詢詳情。</span></li>
+    <li><span class="k">SIGNED</span><span class="v" style="color:var(--bg)">警告、建議及客戶確認須記錄在案並要求客戶簽署；副本給客戶，正本由主事保存最少 <em>7 年</em>。</span></li>
+  </ul>
+</section>
+
+<!-- 95 paper 4 top-up: principal controls -->
+<section class="slide light" data-screen-label="95 卷四補強 主事管控">
+  <div class="deck-tag">2019卷四補強 · 指引 III.20 · III.60 · 7.2.5</div>
+  <p class="eyebrow">Principal controls</p>
+  <h2 class="h-xl">附屬跟主事制度走；<br/>主事要管文件、訓練、申報。</h2>
+  <ul class="facts two">
+    <li><span class="k">SUBSIDIARY</span><span class="v">附屬中介人須遵守其主事中介人就管控、程序及操守標準所訂定的規定。</span></li>
+    <li><span class="k">MATERIALS</span><span class="v">主事中介人須確保附屬中介人使用的要約文件及市場推廣資料已獲證監會認可。</span></li>
+    <li><span class="k">TRAINING</span><span class="v">主事要確保附屬中介人遵守積金局指明的持續訓練要求；不是只派資深中介人代表其行事。</span></li>
+    <li><span class="k">ANNUAL RETURN</span><span class="v">註冊中介人須在報告期最後一日後 <em>1 個月</em>內提交周年申報表；不交可暫時撤銷註冊。</span></li>
+    <li><span class="k">FEE</span><span class="v">年費須在收費期第一日後 <em>1 個月</em>內繳交；逾期附加費為未繳年費的 <em>10%</em>，仍未繳可暫時撤銷註冊。</span></li>
+  </ul>
+</section>
+
+<!-- 96 paper 4 top-up: appendix investment concepts -->
+<section class="slide dark" data-screen-label="96 卷四補強 附錄VI投資概念">
+  <div class="deck-tag">2019卷四補強 · 附錄 VI</div>
+  <p class="eyebrow">Appendix VI quick facts</p>
+  <h2 class="h-xl" style="color: var(--bg)">附錄題很短，<br/>但答案要一眼認得。</h2>
+  <ul class="facts two">
+    <li><span class="k">MONEY MARKET</span><span class="v" style="color:var(--bg)">貨幣市場工具包括國庫券、存款證、商業票據；屬短期有息金融工具。</span></li>
+    <li><span class="k">CP</span><span class="v" style="color:var(--bg)">商業票據是由大公司發行的短期無抵押債務證券。</span></li>
+    <li><span class="k">BOND</span><span class="v" style="color:var(--bg)">沒有到期日的債券稱為<em>永久債券</em>；債券持有人不是公司擁有人。</span></li>
+    <li><span class="k">RATE</span><span class="v" style="color:var(--bg)">債券價格與利率走勢相反：利率下跌，債券價格上升；利率上升，債券價格下跌。</span></li>
+    <li><span class="k">NAV</span><span class="v" style="color:var(--bg)">每單位淨資產值 = (基礎投資總市值 + 現金 - 累計須付基金行政及管理費用) ÷ 已發行基金單位總數。</span></li>
+    <li><span class="k">DERIVATIVES</span><span class="v" style="color:var(--bg)">衍生工具價值來自基礎投資；可用作對沖以減少價格下跌損失，但風險較高，適合資深/專業投資者。</span></li>
+  </ul>
+</section>
+
+<!-- 97 closing -->
+<section class="slide hero dark center" data-screen-label="97 應試提醒">
+  <div class="eyebrow">考試貼士 · 應試提醒</div>
+  <h2 class="h-hero" style="color: var(--bg)">先讀題目，圈關鍵字。<br/>刪掉不可能，再答。</h2>
+  <p class="lead" style="color: rgba(245,247,250,0.78); margin-top: 16px">「不」、「一定」、「必須」、「除外」是陷阱字眼。<br/>難題先圈起，留待最後。完成後全份覆查至少一次。</p>
+  <p class="meta" style="color: rgba(245,247,250,0.55); margin-top: 24px">合格分數 70% · 答對 56/80 即過。祝考試順利。</p>
+</section>
+
+<!-- chrome -->
+<div class="deck-progress" id="deck-progress" aria-hidden></div>
+<div class="deck-counter"  id="deck-counter">1 / 97</div>
+<div class="deck-hint">← / → · 滾動 · 滑動 · 點擊翻頁</div>
+<div class="deck-nav" aria-label="投影片導覽">
+  <button type="button" id="deck-prev" aria-label="上一頁">◄</button>
+  <button type="button" id="deck-next" aria-label="下一頁">►</button>
+</div>
+<form class="deck-jump" id="deck-jump" aria-label="快速跳轉">
+  <select id="deck-chapter" aria-label="按章節跳轉">
+    <option value="">章節</option>
+    <option value="4">第1章</option>
+    <option value="8">第2章</option>
+    <option value="14">第3章</option>
+    <option value="42">第4章</option>
+    <option value="47">第5章</option>
+    <option value="61">第6章</option>
+    <option value="65">第7章</option>
+    <option value="79">速查</option>
+    <option value="80">補強</option>
+    <option value="87">卷四</option>
+    <option value="97">應試</option>
+  </select>
+  <input id="deck-page" type="number" min="1" max="97" inputmode="numeric" aria-label="跳到頁碼" placeholder="頁" />
+  <button type="submit" aria-label="跳到指定頁">↵</button>
+</form>
+
+<script>
+  (function () {
+    var slides   = document.querySelectorAll('.slide');
+    var counter  = document.getElementById('deck-counter');
+    var progress = document.getElementById('deck-progress');
+    var pageInput = document.getElementById('deck-page');
+    var chapterSelect = document.getElementById('deck-chapter');
+    var KEY      = 'od-deck-pos-mpf';
+    var active   = 0;
+
+    function scrollLeft() {
+      return Math.max(
+        document.body ? document.body.scrollLeft || 0 : 0,
+        document.documentElement ? document.documentElement.scrollLeft || 0 : 0,
+        window.pageXOffset || 0
+      );
+    }
+    function scrollToSlide(i, behavior) {
+      var left = i * window.innerWidth;
+      if (behavior === 'auto' || behavior === 'instant') {
+        var bodyBehavior = document.body.style.scrollBehavior;
+        var htmlBehavior = document.documentElement.style.scrollBehavior;
+        document.body.style.scrollBehavior = 'auto';
+        document.documentElement.style.scrollBehavior = 'auto';
+        document.body.scrollLeft = left;
+        document.documentElement.scrollLeft = left;
+        try { window.scrollTo(left, 0); } catch (_) {}
+        setTimeout(function () {
+          document.body.style.scrollBehavior = bodyBehavior;
+          document.documentElement.style.scrollBehavior = htmlBehavior;
+        }, 0);
+        return;
+      }
+      var opts = { left: left, top: 0, behavior: behavior || 'smooth' };
+      try { document.body.scrollTo(opts); } catch (_) {}
+      try { document.documentElement.scrollTo(opts); } catch (_) {}
+      try { window.scrollTo(opts); } catch (_) {}
+      if (slides[i] && slides[i].scrollIntoView) {
+        try { slides[i].scrollIntoView({ behavior: behavior || 'smooth', block: 'nearest', inline: 'start' }); } catch (_) {}
+      }
+    }
+    function setActive(i) {
+      active = i;
+      if (counter)  counter.textContent  = (i + 1) + ' / ' + slides.length;
+      if (progress) progress.style.width = (((i + 1) / slides.length) * 100) + '%';
+      if (pageInput && document.activeElement !== pageInput) pageInput.value = String(i + 1);
+      try { localStorage.setItem(KEY, String(i)); } catch (_) {}
+    }
+    function go(i, behavior) {
+      var next = Math.max(0, Math.min(slides.length - 1, i));
+      setActive(next);
+      scrollToSlide(next, behavior || 'smooth');
+    }
+    function syncFromScroll() {
+      var i = Math.round(scrollLeft() / window.innerWidth);
+      if (i !== active && i >= 0 && i < slides.length) setActive(i);
+    }
+    function onKey(e) {
+      if (e.__mpfDeckHandled) return;
+      var t = e.target;
+      var tag = t && t.tagName ? t.tagName.toUpperCase() : '';
+      if (t && (t.isContentEditable || tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT')) return;
+      if (e.key === 'ArrowRight' || e.key === 'Right' || e.key === ' ' || e.key === 'Spacebar' || e.code === 'Space' || e.key === 'PageDown') {
+        e.__mpfDeckHandled = true;
+        e.preventDefault();
+        go(active + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'Left' || e.key === 'PageUp') {
+        e.__mpfDeckHandled = true;
+        e.preventDefault();
+        go(active - 1);
+      } else if (e.key === 'Home') {
+        e.__mpfDeckHandled = true;
+        e.preventDefault();
+        go(0);
+      } else if (e.key === 'End') {
+        e.__mpfDeckHandled = true;
+        e.preventDefault();
+        go(slides.length - 1);
+      }
+    }
+
+    window.addEventListener('keydown', onKey, true);
+    document.addEventListener('keydown', onKey, true);
+    document.addEventListener('scroll', syncFromScroll, { passive: true, capture: true });
+    window.addEventListener('scroll', syncFromScroll,   { passive: true });
+
+    var btnPrev = document.getElementById('deck-prev');
+    var btnNext = document.getElementById('deck-next');
+    var jumpForm = document.getElementById('deck-jump');
+    if (btnPrev) btnPrev.addEventListener('click', function (e) { e.preventDefault(); go(active - 1); });
+    if (btnNext) btnNext.addEventListener('click', function (e) { e.preventDefault(); go(active + 1); });
+    if (jumpForm) {
+      jumpForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var page = pageInput ? parseInt(pageInput.value, 10) : NaN;
+        if (!isNaN(page)) go(page - 1, 'auto');
+        focusDeck();
+      });
+    }
+    if (chapterSelect) {
+      chapterSelect.addEventListener('change', function () {
+        var page = parseInt(chapterSelect.value, 10);
+        if (!isNaN(page)) {
+          go(page - 1, 'auto');
+          chapterSelect.value = '';
+          focusDeck();
+        }
+      });
+    }
+
+    // click-anywhere fallback: left-half = prev, right-half = next. ignore buttons/links/inputs.
+    document.addEventListener('click', function (e) {
+      var t = e.target;
+      while (t && t !== document.body) {
+        var tag = (t.tagName || '').toLowerCase();
+        if (tag === 'a' || tag === 'button' || tag === 'input' || tag === 'textarea' || tag === 'select') return;
+        t = t.parentNode;
+      }
+      if (e.clientX < window.innerWidth / 2) go(active - 1);
+      else go(active + 1);
+    });
+
+    document.documentElement.setAttribute('tabindex', '-1');
+    document.body.setAttribute('tabindex', '-1');
+    document.body.style.outline = 'none';
+    document.documentElement.style.outline = 'none';
+    function focusDeck() {
+      try { window.focus(); } catch (_) {}
+      try { document.documentElement.focus({ preventScroll: true }); } catch (_) {}
+      try { document.body.focus({ preventScroll: true }); } catch (_) {}
+    }
+    document.addEventListener('mousedown', focusDeck);
+    document.addEventListener('pointerdown', focusDeck);
+    document.addEventListener('touchstart', focusDeck, { passive: true });
+    document.addEventListener('mouseenter', focusDeck);
+    window.addEventListener('load', focusDeck);
+    window.addEventListener('focus', focusDeck);
+    focusDeck();
+
+    try {
+      var saved = parseInt(localStorage.getItem(KEY) || '0', 10);
+      if (!isNaN(saved) && saved >= 0 && saved < slides.length) {
+        setActive(saved);
+        scrollToSlide(saved, 'auto');
+      } else {
+        setActive(0);
+      }
+    } catch (_) { setActive(0); }
+  })();
+</script>
+</body>
+</html>

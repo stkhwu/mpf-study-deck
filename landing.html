@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>強積金練習 · 為強積金中介人考試而設的練習工具</title>
+  <style>
+    :root {
+      --bg:           oklch(96.5% 0.012 95);
+      --surface:      oklch(98% 0.008 95);
+      --surface-2:    #ffffff;
+      --fg:           oklch(20% 0.005 50);
+      --muted:        oklch(45% 0.008 70);
+      --muted-2:      oklch(58% 0.005 70);
+      --border:       oklch(94% 0.008 95);
+      --border-2:     oklch(91% 0.01 95);
+      --accent:       oklch(55% 0.12 38);
+      --accent-soft:  color-mix(in oklch, var(--accent) 12%, transparent);
+      --dark-surface: oklch(22% 0.005 80);
+
+      --font-display: 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', 'Songti SC', 'PingFang TC', serif;
+      --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
+      --font-mono:    ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+      --container: 1120px;
+      --gutter:    32px;
+      --radius:    10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+
+      --fs-h1: clamp(48px, 7vw, 80px);
+      --fs-h2: clamp(32px, 4.2vw, 52px);
+      --fs-h3: 22px;
+      --fs-lead: 19px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    button, a { font: inherit; cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    p { text-wrap: pretty; margin: 0; }
+    h1, h2, h3 { text-wrap: balance; margin: 0; font-family: var(--font-display); font-weight: 500; letter-spacing: -0.015em; }
+
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+    .stack > * + * { margin-top: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 56px; align-items: center; }
+    @media (max-width: 920px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+
+    .topnav { position: sticky; top: 0; z-index: 10; background: color-mix(in oklch, var(--bg) 88%, transparent); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    .topnav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px var(--gutter); max-width: var(--container); margin: 0 auto; gap: 24px; }
+    .brand { font-family: var(--font-display); font-size: 22px; font-weight: 500; display: flex; align-items: baseline; gap: 8px; }
+    .brand .mark { display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--accent); transform: translateY(-1px); }
+    .brand small { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .topnav nav { display: flex; gap: 24px; align-items: center; }
+    .topnav nav a { font-size: 14px; color: var(--muted); transition: color 0.15s; }
+    .topnav nav a:hover { color: var(--fg); }
+
+    .section { padding-block: clamp(72px, 10vw, 120px); }
+    .section + .section { border-top: 1px solid var(--border-2); }
+
+    .h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1.04; }
+    .h2 { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.1; }
+    .h3 { font-size: var(--fs-h3); font-weight: 500; line-height: 1.3; }
+    .lead { font-size: var(--fs-lead); line-height: 1.55; color: var(--muted); max-width: 60ch; }
+    .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0; }
+    .meta { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+    .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+    .hero { padding-block: clamp(80px, 11vw, 140px); }
+    .hero-center { text-align: center; max-width: 38ch; margin-inline: auto; }
+    .hero h1 { margin: 20px 0 24px; }
+    .hero-cta { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: var(--radius); font-size: 15px; font-weight: 500; border: 1px solid transparent; transition: all 0.15s; }
+    .btn-primary { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+    .btn-primary:hover { background: color-mix(in oklch, var(--accent) 88%, black); }
+    .btn-secondary { background: transparent; color: var(--fg); border-color: var(--border-2); }
+    .btn-secondary:hover { border-color: var(--fg); }
+    .btn-ghost { color: var(--muted); padding-inline: 8px; }
+    .btn-ghost:hover { color: var(--accent); }
+    .btn-arrow::after { content: '→'; transition: transform 0.15s; }
+    .btn-arrow:hover::after { transform: translateX(2px); }
+
+    /* App mockup */
+    .mock {
+      background: var(--surface-2);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: rgba(0,0,0,0.04) 0px 4px 24px;
+    }
+    .mock-bar {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 6px; align-items: center;
+      background: var(--bg);
+    }
+    .mock-bar .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-2); }
+    .mock-bar .dot.r { background: oklch(70% 0.16 28); }
+    .mock-bar .dot.y { background: oklch(85% 0.16 95); }
+    .mock-bar .dot.g { background: oklch(75% 0.14 145); }
+    .mock-bar .addr { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+    .mock-body { padding: 24px; }
+    .mock-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+    .mock-question {
+      font-family: var(--font-display);
+      font-size: 19px;
+      line-height: 1.4;
+      margin: 8px 0 16px;
+    }
+    .mock-opts { display: flex; flex-direction: column; gap: 8px; }
+    .mock-opt {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--border-2);
+      border-radius: 8px;
+      font-size: 13.5px;
+    }
+    .mock-opt.correct {
+      border-color: oklch(55% 0.13 145);
+      background: oklch(96% 0.04 145);
+    }
+    .mock-opt .ml {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: var(--font-mono); font-size: 11px;
+      border: 1px solid var(--border-2); color: var(--muted);
+    }
+    .mock-opt.correct .ml { background: oklch(55% 0.13 145); border-color: oklch(55% 0.13 145); color: white; }
+    .mock-feedback {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: oklch(96% 0.04 145);
+      border-left: 3px solid oklch(55% 0.13 145);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .mock-feedback .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+    .mock-progress {
+      margin-top: 16px;
+      height: 4px; background: var(--border);
+      border-radius: 999px;
+      position: relative;
+    }
+    .mock-progress::before {
+      content: ''; position: absolute; inset: 0;
+      width: 42%; background: var(--accent); border-radius: 999px;
+    }
+    .mock-meta {
+      display: flex; justify-content: space-between;
+      margin-top: 10px;
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--muted);
+    }
+
+    .feature-card { padding: 0; }
+    .feature-card .mark {
+      width: 36px; height: 36px;
+      display: grid; place-items: center;
+      border: 1px solid var(--border-2);
+      border-radius: 10px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .feature-card h3 { margin-bottom: 8px; }
+    .feature-card p { color: var(--muted); font-size: 15px; }
+
+    .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    @media (max-width: 640px) { .stat-row { grid-template-columns: repeat(2, 1fr); } }
+    .stat-num { font-family: var(--font-display); font-size: clamp(48px, 6vw, 72px); line-height: 0.95; letter-spacing: -0.03em; color: var(--accent); font-weight: 500; }
+    .stat-label { color: var(--muted); font-size: 13px; margin-top: 8px; font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
+
+    /* dark section */
+    .section.dark {
+      background: oklch(22% 0.005 80);
+      color: oklch(96% 0.008 95);
+      border: none;
+    }
+    .section.dark .lead { color: oklch(70% 0.005 70); }
+    .section.dark .eyebrow { color: oklch(70% 0.11 38); }
+    .section.dark .btn-secondary { color: oklch(96% 0.008 95); border-color: oklch(30% 0.005 80); }
+    .section.dark .btn-secondary:hover { border-color: oklch(70% 0.005 70); }
+
+    .quote {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 2.8vw, 36px);
+      line-height: 1.3;
+      max-width: 30ch;
+    }
+    .quote-author { color: var(--muted); font-size: 14px; margin-top: 16px; font-family: var(--font-mono); }
+
+    .pagefoot {
+      padding: 40px var(--gutter);
+      border-top: 1px solid var(--border-2);
+      color: var(--muted);
+      font-size: 13px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+    .pagefoot .meta { font-family: var(--font-mono); }
+  </style>
+</head>
+<body>
+  <header class="topnav" data-od-id="topnav">
+    <div class="topnav-inner">
+      <div class="brand">
+        <span class="mark"></span>
+        <span>強積金練習</span>
+        <small>MPF QUIZ</small>
+      </div>
+      <nav>
+        <a href="#features">功能</a>
+        <a href="#stats">內容</a>
+        <a href="#how">怎樣用</a>
+        <a href="index.html#practice" class="btn btn-primary js-start-practice" style="padding: 8px 16px;">開始練習 →</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section hero" data-od-id="hero">
+      <div class="container hero-center">
+        <p class="eyebrow">強積金中介人考試 · 練習工具</p>
+        <h1 class="h1">不只練習答對。<br/>練到知道為甚麼。</h1>
+        <p class="lead" style="margin-inline:auto; margin-bottom: 32px;">收錄 2019 年七份卷四模擬試題與強積金練習題庫共 747 題選擇題。每題即時對答案，並附《強積金中介人考試研習資料手冊（第 9 版）》章節索引。模擬考試按官方七章比重隨機抽題。</p>
+        <div class="hero-cta">
+          <a href="index.html#practice" class="btn btn-primary js-start-practice">開始練習 →</a>
+          <a href="index.html#exam" class="btn btn-secondary">模擬考試 60 題</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="mock-preview">
+      <div class="container grid-2">
+        <div>
+          <p class="eyebrow">即時對答案</p>
+          <h2 class="h2" style="margin-top: 16px;">答完，立即知道對在哪裡、錯在哪裡。</h2>
+          <p class="lead" style="margin-top: 20px;">每題選擇後即顯示正確答案，附上研習資料手冊的章節編號與小節標題，知道下一步去哪裡溫習。</p>
+          <ul style="margin-top: 24px; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
+            <li class="row" style="display:flex; gap:12px; align-items:flex-start;"><span class="num" style="color:var(--accent); font-size:14px;">01</span><span>對答案不是顯示「對 ╱ 錯」，而是顯示完整正確選項與章節定位。</span></li>
+            <li class="row" style="display:flex; gap:12px; align-items:flex-start;"><span class="num" style="color:var(--accent); font-size:14px;">02</span><span>支援按 1/2/3/4 鍵或 A/B/C/D 直接選答，左右方向鍵翻題。</span></li>
+            <li class="row" style="display:flex; gap:12px; align-items:flex-start;"><span class="num" style="color:var(--accent); font-size:14px;">03</span><span>進度自動儲存在本機，可隨時返回繼續，不需登入。</span></li>
+          </ul>
+        </div>
+        <div class="mock" aria-label="App preview">
+          <div class="mock-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="addr">mpf-quiz.local / practice</span>
+          </div>
+          <div class="mock-body">
+            <p class="mock-eyebrow">第 3 章 · 3.1.2 專業彌償保險</p>
+            <p class="mock-question">強積金計劃必須購有專業彌償保險，其保障範圍並不包括：</p>
+            <div class="mock-opts">
+              <div class="mock-opt"><span class="ml">A</span><span>因訂明風險而可能蒙受的損失</span></div>
+              <div class="mock-opt"><span class="ml">B</span><span>訂明的風險包括欺詐及疏忽行為</span></div>
+              <div class="mock-opt correct"><span class="ml">C</span><span>計劃資產下降時也得到保障</span></div>
+              <div class="mock-opt"><span class="ml">D</span><span>比一般專業彌償保險提供更廣的保障範圍</span></div>
+            </div>
+            <div class="mock-feedback">
+              <div class="k">參考研習資料</div>
+              <span>第 3 章 · 3.1.2 專業彌償保險</span>
+            </div>
+            <div class="mock-progress"></div>
+            <div class="mock-meta">
+              <span>第 142 / 747 題</span>
+              <span>正確 101 · 錯誤 12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" data-od-id="features">
+      <div class="container stack" style="gap: 56px;">
+        <div style="max-width: 40ch;">
+          <p class="eyebrow">設計重點</p>
+          <h2 class="h2" style="margin-top: 16px;">給自學考生的三件事。</h2>
+        </div>
+        <div class="grid-3">
+          <div class="feature-card">
+            <div class="mark">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
+            </div>
+            <h3 class="h3">進度條</h3>
+            <p>每章節獨立追蹤已答 / 答對 / 答錯題數。退出再回來，從停下的地方接續。</p>
+          </div>
+          <div class="feature-card">
+            <div class="mark">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            </div>
+            <h3 class="h3">題目導航</h3>
+            <p>左側面板顯示所有題目，顏色標示正確 / 錯誤 / 未答。一鍵跳到任意題目。</p>
+          </div>
+          <div class="feature-card">
+            <div class="mark">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <h3 class="h3">兩種模式</h3>
+            <p>練習模式即時對答案；模擬考試 30 / 60 / 80 題隨機抽題，答完一次過顯示成績。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="stats" data-od-id="stats">
+      <div class="container">
+        <p class="eyebrow">題庫規模</p>
+        <h2 class="h2" style="margin: 16px 0 56px;">八份來源、七章章節、747 題。</h2>
+        <div class="stat-row">
+          <div>
+            <div class="stat-num num">747</div>
+            <div class="stat-label">題目總數</div>
+          </div>
+          <div>
+            <div class="stat-num num">7</div>
+            <div class="stat-label">章節分類</div>
+          </div>
+          <div>
+            <div class="stat-num num">7</div>
+            <div class="stat-label">套卷四模擬試題</div>
+          </div>
+          <div>
+            <div class="stat-num num">9th</div>
+            <div class="stat-label">研習資料手冊版本</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how" data-od-id="how">
+      <div class="container grid-2">
+        <div>
+          <p class="eyebrow">怎樣用</p>
+          <h2 class="h2" style="margin-top: 16px;">三十秒上手。</h2>
+          <p class="lead" style="margin-top: 20px;">瀏覽器打開即可使用，毋須註冊、毋須安裝。資料只儲存於本機 localStorage，不會上傳。</p>
+          <div class="hero-cta" style="margin-top: 28px; justify-content: flex-start;">
+            <a href="index.html#practice" class="btn btn-primary js-start-practice">立即開始 →</a>
+            <a href="index.html#practice" class="btn btn-ghost btn-arrow js-start-practice">了解快速鍵</a>
+          </div>
+        </div>
+        <div class="stack" style="gap: 24px;">
+          <div style="display: flex; gap: 16px; align-items: flex-start;">
+            <span class="num" style="color: var(--accent); font-size: 24px; min-width: 36px;">01</span>
+            <div>
+              <h3 class="h3" style="margin-bottom: 4px;">挑章節</h3>
+              <p style="color: var(--muted); font-size: 15px;">左欄按章節切換，或從卷四／題庫選來源。</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start;">
+            <span class="num" style="color: var(--accent); font-size: 24px; min-width: 36px;">02</span>
+            <div>
+              <h3 class="h3" style="margin-bottom: 4px;">答題目</h3>
+              <p style="color: var(--muted); font-size: 15px;">按鍵盤 1-4 或 A-D 即選即答，方向鍵翻題。</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start;">
+            <span class="num" style="color: var(--accent); font-size: 24px; min-width: 36px;">03</span>
+            <div>
+              <h3 class="h3" style="margin-bottom: 4px;">看解答</h3>
+              <p style="color: var(--muted); font-size: 15px;">即時對答案，並指引研習資料手冊章節。</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start;">
+            <span class="num" style="color: var(--accent); font-size: 24px; min-width: 36px;">04</span>
+            <div>
+              <h3 class="h3" style="margin-bottom: 4px;">入考試</h3>
+              <p style="color: var(--muted); font-size: 15px;">準備好了？按「模擬考試」隨機抽題計分。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="cta-strip">
+      <div class="container" style="text-align: center;">
+        <p class="quote" style="margin-inline: auto; margin-bottom: 24px;">「合格分數為 70%。完成試題後應將整份試卷覆查 1 次以上，對考試合格大有幫助。」</p>
+        <p class="quote-author">— 富衛商學院《一般考試須知及溫習策略》</p>
+        <div class="hero-cta" style="margin-top: 40px;">
+          <a href="index.html#practice" class="btn btn-primary js-start-practice">開始第一題 →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pagefoot" data-od-id="footer">
+    <span>© 強積金練習 · 內部學習用途</span>
+    <span class="meta">資料來源：友邦保險卷四模擬試題、富衛商學院強積金題庫、《強積金中介人考試研習資料手冊》第 9 版</span>
+  </footer>
+  <script>
+    document.querySelectorAll('.js-start-practice').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.assign('index.html#practice');
+      });
+    });
+  </script>
+</body>
+</html>

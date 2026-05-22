@@ -1,0 +1,20 @@
+# Build sources & scratch — not part of the published site.
+# study-notes.html is committed pre-built; regenerate locally with
+# build_study_notes.py + notes.txt + study-notes-toc.json (kept out of git).
+notes.txt
+study-notes-toc.json
+build_study_notes.py
+mock_ocr.txt
+mock_raw.txt
+mock.txt
+ocr.err
+ocr.swift
+mpf-mock-coverage-deck.html.artifact.json
+mock_pages/
+*.pdf
+*.png
+.claude/
+.od-skills/
+.DS_Store
+__pycache__/
+*.mjs
