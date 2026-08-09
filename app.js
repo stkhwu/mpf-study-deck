@@ -79,7 +79,7 @@ const defaultState = {
   chapterFilter: 'all',
   currentIdx: 0,
   answers: {},
-  exam: null, // {questions: [idx...], chosen: {qid: letter}, started: ts}
+  exam: null, // {questionIds: [qid...], chosen: {qid: letter}, started: ts}
   examHistory: [], // [{id, started, finishedAt, questionIds, choices, result}]
   examReview: null, // {recordId} — wrong/skipped questions from one exam record
   resultRecordId: null,
@@ -119,7 +119,14 @@ function loadState() {
   }
 }
 function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  if (state.mode === 'exam' && state.exam && !state.exam.finished) {
+    state.exam.currentIdx = state.currentIdx;
+  }
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (error) {
+    console.warn('Quiz progress could not be saved.', error);
+  }
 }
 
 function computeExamResult(questionIds, choices) {
@@ -136,11 +143,7 @@ function computeExamResult(questionIds, choices) {
 
 function normalizeExamRecord(record) {
   if (!record || typeof record !== 'object') return null;
-  const rawIds = Array.isArray(record.questionIds)
-    ? record.questionIds
-    : Array.isArray(record.questions)
-      ? record.questions.map(idx => ALL_QS[idx] && ALL_QS[idx].id)
-      : [];
+  const rawIds = Array.isArray(record.questionIds) ? record.questionIds : [];
   const questionIds = [];
   const seen = new Set();
   for (const rawId of rawIds) {
@@ -204,7 +207,7 @@ function currentResultRecord() {
       started: state.exam.started,
       finishedAt: state.exam.finishedAt || Date.now(),
       size: state.exam.size,
-      questions: state.exam.questions,
+      questionIds: state.exam.questionIds,
       choices: state.exam.chosen,
       distribution: state.exam.distribution,
       sourceFilter: state.exam.sourceFilter,
@@ -220,7 +223,7 @@ function createExamHistoryRecord(exam) {
     started: exam.started,
     finishedAt: exam.finishedAt,
     size: exam.size,
-    questions: exam.questions,
+    questionIds: exam.questionIds,
     choices: exam.chosen,
     distribution: exam.distribution,
     sourceFilter: exam.sourceFilter,
@@ -236,14 +239,36 @@ function rememberExamRecord(record) {
 function sanitizeState(nextState) {
   let changed = false;
 
+  const validModes = new Set(['practice', 'review', 'redo', 'exam', 'exam-review']);
+  if (!validModes.has(nextState.mode)) {
+    nextState.mode = 'practice';
+    changed = true;
+  }
+  if (!['all', 'paper4', 'mpf_mock'].includes(nextState.sourceFilter)) {
+    nextState.sourceFilter = 'all';
+    changed = true;
+  }
+  if (!['all', '1', '2', '3', '4', '5', '6', '7', '0'].includes(nextState.chapterFilter)) {
+    nextState.chapterFilter = 'all';
+    changed = true;
+  }
+  if (!Number.isInteger(nextState.currentIdx) || nextState.currentIdx < 0) {
+    nextState.currentIdx = 0;
+    changed = true;
+  }
+
   const pruneAnswers = answers => {
     const out = {};
     for (const [qid, answer] of Object.entries(answers || {})) {
-      if (!LIVE_QIDS.has(qid)) {
+      const question = Q_BY_ID.get(qid);
+      const chosen = answer && answer.chosen;
+      if (!question || !['A', 'B', 'C', 'D'].includes(chosen)) {
         changed = true;
         continue;
       }
-      out[qid] = answer;
+      const correct = chosen === question.answer;
+      if (answer.correct !== correct) changed = true;
+      out[qid] = { chosen, correct };
     }
     return out;
   };
@@ -285,14 +310,54 @@ function sanitizeState(nextState) {
     changed = true;
   }
 
-  if (nextState.exam && Array.isArray(nextState.exam.questions)) {
-    const invalidExam = nextState.exam.questions.some(idx => !Number.isInteger(idx) || idx < 0 || idx >= ALL_QS.length);
-    if (invalidExam) {
+  if (nextState.exam) {
+    if (!Array.isArray(nextState.exam.questionIds)) {
+      // Older active exams stored array positions. Once the bank is curated,
+      // those positions are unsafe because they can point to another question.
       nextState.exam = null;
       if (nextState.mode === 'exam') nextState.mode = 'practice';
       nextState.currentIdx = 0;
       changed = true;
+    } else {
+      const questionIds = [];
+      const seen = new Set();
+      for (const rawId of nextState.exam.questionIds) {
+        const id = String(rawId || '');
+        if (!LIVE_QIDS.has(id) || seen.has(id)) {
+          changed = true;
+          continue;
+        }
+        questionIds.push(id);
+        seen.add(id);
+      }
+      if (!questionIds.length) {
+        nextState.exam = null;
+        if (nextState.mode === 'exam') nextState.mode = 'practice';
+        nextState.currentIdx = 0;
+        changed = true;
+      } else {
+        const chosen = {};
+        for (const id of questionIds) {
+          const choice = nextState.exam.chosen && nextState.exam.chosen[id];
+          if (['A', 'B', 'C', 'D'].includes(choice)) chosen[id] = choice;
+          else if (choice !== undefined) changed = true;
+        }
+        nextState.exam = {
+          ...nextState.exam,
+          questionIds,
+          chosen,
+          size: questionIds.length,
+          currentIdx: Number.isInteger(nextState.exam.currentIdx) && nextState.exam.currentIdx >= 0
+            ? Math.min(nextState.exam.currentIdx, questionIds.length - 1)
+            : 0,
+        };
+      }
     }
+  }
+  if (nextState.mode === 'exam' && !nextState.exam) {
+    nextState.mode = 'practice';
+    nextState.currentIdx = 0;
+    changed = true;
   }
 
   if (nextState.resultRecordId && !nextState.examHistory.some(record => record.id === nextState.resultRecordId)) {
@@ -317,7 +382,13 @@ function sanitizeState(nextState) {
     }
   }
 
-  if (changed) localStorage.setItem(STORAGE_KEY, JSON.stringify(nextState));
+  if (changed) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(nextState));
+    } catch (error) {
+      console.warn('Sanitized quiz progress could not be saved.', error);
+    }
+  }
   return nextState;
 }
 
@@ -332,7 +403,7 @@ function getFilteredQs() {
 
 function getActiveList() {
   if (state.mode === 'exam' && state.exam) {
-    return state.exam.questions.map(idx => ALL_QS[idx]);
+    return state.exam.questionIds.map(qid => Q_BY_ID.get(qid)).filter(Boolean);
   }
   if (state.mode === 'exam-review') {
     const record = currentExamReviewRecord();
@@ -351,6 +422,9 @@ function getActiveList() {
 }
 
 function startRedoWrong() {
+  if (state.mode === 'exam' && state.exam && !state.exam.finished) {
+    state.exam.currentIdx = state.currentIdx;
+  }
   const wrongIds = Object.keys(state.answers).filter(id => !state.answers[id].correct);
   const existingRedoIds = Array.isArray(state.redoSet) ? state.redoSet : [];
   const redoIds = wrongIds.length ? wrongIds : existingRedoIds;
@@ -391,14 +465,16 @@ function showScreen(name) {
     const el = document.getElementById(`screen-${s}`);
     if (el) el.hidden = (s !== name);
   }
-  const showProgress = (name === 'practice' || name === 'exam-cover');
+  const showProgress = name === 'practice';
   $('#progress').hidden = !showProgress;
 }
 
 function openPracticeMode(mode = 'practice') {
+  if (state.mode === 'exam' && state.exam && !state.exam.finished) {
+    state.exam.currentIdx = state.currentIdx;
+  }
   state.mode = mode;
   state.examReview = null;
-  if (mode !== 'exam' && state.exam) state.exam.finished = true;
   state.currentIdx = 0;
   saveState();
   setActiveNav(mode);
@@ -409,6 +485,15 @@ function openPracticeMode(mode = 'practice') {
 
 function openExamCover() {
   setActiveNav('exam');
+  if (state.exam && !state.exam.finished && state.exam.questionIds.length) {
+    state.mode = 'exam';
+    state.currentIdx = Math.min(state.exam.currentIdx || 0, state.exam.questionIds.length - 1);
+    saveState();
+    showScreen('practice');
+    renderSidebar();
+    renderPanel();
+    return;
+  }
   showScreen('exam-cover');
   renderExamHistoryList();
 }
@@ -569,6 +654,10 @@ function answerForQuestion(q) {
     const chosen = record.choices[q.id] || null;
     return { chosen, correct: chosen === q.answer, examRecord: true };
   }
+  if (state.mode === 'exam' && state.exam && !isExamFinished()) {
+    const chosen = state.exam.chosen[q.id];
+    return chosen ? { chosen, correct: false, pending: true } : null;
+  }
   if (state.mode === 'redo') return (state.redoAnswers || {})[q.id];
   return state.answers[q.id];
 }
@@ -651,7 +740,7 @@ function renderPanel() {
   const examMode = state.mode === 'exam' && !isExamFinished();
   const examReviewMode = state.mode === 'exam-review';
   const examChosen = examMode && state.exam && state.exam.chosen[q.id];
-  const locked = examReviewMode || examChosen || (ans && ans.correct);
+  const locked = examReviewMode || (!examMode && ans && ans.correct);
 
   for (const letter of ['A', 'B', 'C', 'D']) {
     const opt = document.createElement('button');
@@ -823,8 +912,9 @@ function scaleDistribution(n) {
 }
 
 function startExam(n) {
-  // Build per-chapter pool, honoring source filter
-  const pool = getFilteredQs();
+  // Official mock exams always draw from the full curated bank. Practice
+  // filters must not distort the official chapter distribution.
+  const pool = ALL_QS;
   const byChapter = {};
   for (const q of pool) {
     (byChapter[q.chapter] = byChapter[q.chapter] || []).push(q);
@@ -854,17 +944,23 @@ function startExam(n) {
   }
 
   // Final shuffle so chapter ordering isn't predictable
-  const finalOrder = fisherYates(picked).map(q => ALL_QS.indexOf(q)).filter(i => i >= 0);
+  const finalOrder = fisherYates(picked).map(q => q.id);
+
+  if (finalOrder.length !== n) {
+    alert('題庫未能提供完整的模擬試卷，請聯絡管理員。');
+    return;
+  }
 
   state.exam = {
-    questions: finalOrder,
+    questionIds: finalOrder,
     chosen: {},
     started: Date.now(),
     finished: false,
+    currentIdx: 0,
     size: n,
     distribution: quotas,
     shortFalls,
-    sourceFilter: state.sourceFilter,
+    sourceFilter: 'all',
   };
   state.mode = 'exam';
   state.examReview = null;
@@ -878,12 +974,21 @@ function startExam(n) {
 
 function finishExam() {
   if (!state.exam) return;
+  const total = state.exam.questionIds.length;
+  const answered = state.exam.questionIds.filter(qid => state.exam.chosen[qid]).length;
+  const skippedCount = total - answered;
+  const prompt = skippedCount
+    ? `尚有 ${skippedCount} 題未作答，確定交卷嗎？`
+    : '所有題目已作答，確定交卷嗎？';
+  if (!confirm(prompt)) return;
+
   state.exam.finished = true;
   state.exam.finishedAt = Date.now();
   // Score
   let correct = 0, incorrect = 0, skipped = 0;
-  for (const idx of state.exam.questions) {
-    const q = ALL_QS[idx];
+  for (const qid of state.exam.questionIds) {
+    const q = Q_BY_ID.get(qid);
+    if (!q) continue;
     const choice = state.exam.chosen[q.id];
     if (!choice) { skipped++; continue; }
     const isRight = choice === q.answer;
@@ -946,6 +1051,8 @@ function renderExamResult(record) {
 function openExamResult(recordId) {
   const record = getExamRecordById(recordId);
   if (!record) return;
+  state.mode = 'exam';
+  state.examReview = null;
   state.resultRecordId = record.id;
   saveState();
   setActiveNav('exam');
@@ -1045,14 +1152,28 @@ function wire() {
     startExam(n);
   });
   $('#exam-back').addEventListener('click', () => {
-    showScreen(state.answers && Object.keys(state.answers).length ? 'practice' : 'welcome');
+    if (state.answers && Object.keys(state.answers).length) {
+      openPracticeMode('practice');
+    } else {
+      state.mode = 'practice';
+      state.currentIdx = 0;
+      saveState();
+      setActiveNav('practice');
+      showScreen('welcome');
+    }
   });
   // Render initial distribution preview (default 80)
   renderDistPreview(80);
 
   // result
   $('#result-retry').addEventListener('click', () => openExamCover());
-  $('#result-home').addEventListener('click', () => showScreen('welcome'));
+  $('#result-home').addEventListener('click', () => {
+    state.mode = 'practice';
+    state.currentIdx = 0;
+    saveState();
+    setActiveNav('practice');
+    showScreen('welcome');
+  });
   $('#result-review').addEventListener('click', () => {
     const record = currentResultRecord();
     if (record) openExamRecordReview(record.id);
@@ -1260,6 +1381,10 @@ function init() {
     showScreen('practice');
     renderSidebar();
     renderPanel();
+  } else if (state.mode === 'exam' && state.exam?.finished && currentResultRecord()) {
+    setActiveNav('exam');
+    showScreen('exam-result');
+    renderExamResult(currentResultRecord());
   } else if (state.mode === 'exam-review' && currentExamReviewRecord()) {
     setActiveNav('exam');
     showScreen('practice');

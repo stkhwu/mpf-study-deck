@@ -9,7 +9,7 @@ A free study tool for the Hong Kong **MPF Intermediary Examination**
 
 | Page | Purpose |
 |---|---|
-| `index.html` | Quiz app — 747 practice questions, practice / mock-exam / wrong-question review / redo modes. Each question deep-links into the study notes. |
+| `index.html` | Quiz app — 691 curated practice questions, practice / mock-exam / wrong-question review / redo modes. Each question deep-links into the study notes. |
 | `study-notes.html` | The full 研習資料手冊（第九版）handbook, split into anchored sections so the quiz can jump straight to the source for any question. |
 | `mpf-mock-coverage-deck.html` | A 97-slide revision deck cross-referencing the handbook against the mock question bank. |
 | `landing.html` | Landing page. |
