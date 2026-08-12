@@ -190,14 +190,6 @@
     .section.dark .btn-secondary { color: oklch(96% 0.008 95); border-color: oklch(30% 0.005 80); }
     .section.dark .btn-secondary:hover { border-color: oklch(70% 0.005 70); }
 
-    .quote {
-      font-family: var(--font-display);
-      font-size: clamp(26px, 2.8vw, 36px);
-      line-height: 1.3;
-      max-width: 30ch;
-    }
-    .quote-author { color: var(--muted); font-size: 14px; margin-top: 16px; font-family: var(--font-mono); }
-
     .pagefoot {
       padding: 40px var(--gutter);
       border-top: 1px solid var(--border-2);
@@ -230,8 +222,7 @@
   <main>
     <section class="section hero" data-od-id="hero">
       <div class="container hero-center">
-        <p class="eyebrow">強積金中介人考試 · 練習工具</p>
-        <h1 class="h1">不只練習答對。<br/>練到知道為甚麼。</h1>
+        <h1 class="h1">強積金中介人考試練習</h1>
         <p class="lead" style="margin-inline:auto; margin-bottom: 32px;">收錄 2019 年七份卷四模擬試題與強積金練習題庫共 691 題經整理選擇題。每題即時對答案，並附《強積金中介人考試研習資料手冊（第 9 版）》章節索引。模擬考試按官方七章比重隨機抽題。</p>
         <div class="hero-cta">
           <a href="index.html#practice" class="btn btn-primary js-start-practice">開始練習 →</a>
@@ -244,10 +235,10 @@
       <div class="container grid-2">
         <div>
           <p class="eyebrow">即時對答案</p>
-          <h2 class="h2" style="margin-top: 16px;">答完，立即知道對在哪裡、錯在哪裡。</h2>
-          <p class="lead" style="margin-top: 20px;">每題選擇後即顯示正確答案，附上研習資料手冊的章節編號與小節標題，知道下一步去哪裡溫習。</p>
+          <h2 class="h2" style="margin-top: 16px;">答案及參考章節</h2>
+          <p class="lead" style="margin-top: 20px;">每題作答後顯示正確答案，以及研習資料手冊的章節編號與小節標題。</p>
           <ul style="margin-top: 24px; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 12px;">
-            <li class="row" style="display:flex; gap:12px; align-items:flex-start;"><span class="num" style="color:var(--accent); font-size:14px;">01</span><span>對答案不是顯示「對 ╱ 錯」，而是顯示完整正確選項與章節定位。</span></li>
+            <li class="row" style="display:flex; gap:12px; align-items:flex-start;"><span class="num" style="color:var(--accent); font-size:14px;">01</span><span>顯示完整正確選項及對應章節。</span></li>
             <li class="row" style="display:flex; gap:12px; align-items:flex-start;"><span class="num" style="color:var(--accent); font-size:14px;">02</span><span>支援按 1/2/3/4 鍵或 A/B/C/D 直接選答，左右方向鍵翻題。</span></li>
             <li class="row" style="display:flex; gap:12px; align-items:flex-start;"><span class="num" style="color:var(--accent); font-size:14px;">03</span><span>進度自動儲存在本機，可隨時返回繼續，不需登入。</span></li>
           </ul>
@@ -284,7 +275,7 @@
       <div class="container stack" style="gap: 56px;">
         <div style="max-width: 40ch;">
           <p class="eyebrow">設計重點</p>
-          <h2 class="h2" style="margin-top: 16px;">給自學考生的三件事。</h2>
+          <h2 class="h2" style="margin-top: 16px;">練習功能</h2>
         </div>
         <div class="grid-3">
           <div class="feature-card">
@@ -315,7 +306,7 @@
     <section class="section dark" id="stats" data-od-id="stats">
       <div class="container">
         <p class="eyebrow">題庫規模</p>
-        <h2 class="h2" style="margin: 16px 0 56px;">八份來源、七章章節、691 題。</h2>
+        <h2 class="h2" style="margin: 16px 0 56px;">題庫內容</h2>
         <div class="stat-row">
           <div>
             <div class="stat-num num">691</div>
@@ -341,7 +332,7 @@
       <div class="container grid-2">
         <div>
           <p class="eyebrow">怎樣用</p>
-          <h2 class="h2" style="margin-top: 16px;">三十秒上手。</h2>
+          <h2 class="h2" style="margin-top: 16px;">使用方法</h2>
           <p class="lead" style="margin-top: 20px;">瀏覽器打開即可使用，毋須註冊、毋須安裝。資料只儲存於本機 localStorage，不會上傳。</p>
           <div class="hero-cta" style="margin-top: 28px; justify-content: flex-start;">
             <a href="index.html#practice" class="btn btn-primary js-start-practice">立即開始 →</a>
@@ -374,22 +365,13 @@
             <span class="num" style="color: var(--accent); font-size: 24px; min-width: 36px;">04</span>
             <div>
               <h3 class="h3" style="margin-bottom: 4px;">入考試</h3>
-              <p style="color: var(--muted); font-size: 15px;">準備好了？按「模擬考試」隨機抽題計分。</p>
+              <p style="color: var(--muted); font-size: 15px;">按「模擬考試」隨機抽題計分。</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" data-od-id="cta-strip">
-      <div class="container" style="text-align: center;">
-        <p class="quote" style="margin-inline: auto; margin-bottom: 24px;">「合格分數為 70%。完成試題後應將整份試卷覆查 1 次以上，對考試合格大有幫助。」</p>
-        <p class="quote-author">— 富衛商學院《一般考試須知及溫習策略》</p>
-        <div class="hero-cta" style="margin-top: 40px;">
-          <a href="index.html#practice" class="btn btn-primary js-start-practice">開始第一題 →</a>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="pagefoot" data-od-id="footer">
